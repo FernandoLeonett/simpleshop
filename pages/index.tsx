@@ -1,8 +1,8 @@
 import React from "react";
 import {GetStaticProps} from "next";
-import {Button, Flex, Image, Grid, Link, Stack, Text, chakra} from "@chakra-ui/react";
+import {Button, Flex, Grid, Link, Stack, Text, chakra, Img} from "@chakra-ui/react";
 import {motion, AnimatePresence, AnimateSharedLayout} from "framer-motion";
-// import Image from "next/image";
+import Image from "next/image";
 
 import {Product} from "../product/types";
 import api from "../product/api";
@@ -36,7 +36,7 @@ const IndexRoute: React.FC<Props> = ({products}) => {
     [cart],
   );
   const MyImage = chakra(Image, {
-    shouldForwardProp: (prop) => ["width", "height", "src", "alt"].includes(prop),
+    shouldForwardProp: (prop) => ["width", "height", "src", "alt", "onClick"].includes(prop),
   });
 
   return (
@@ -59,7 +59,6 @@ const IndexRoute: React.FC<Props> = ({products}) => {
                   cursor={"pointer"}
                   layoutId={product.image}
                   maxHeight={128}
-                  objectFit={"cover"}
                   src={product.image}
                   onClick={() => setSelectedImage(product.image)}
                 />
@@ -109,7 +108,7 @@ const IndexRoute: React.FC<Props> = ({products}) => {
             width="100%"
             onClick={() => setSelectedImage(null)}
           >
-            <Image key="image" src={selectedImage} />
+            <img key="image" src={selectedImage} />
           </Flex>
         )}
       </AnimatePresence>

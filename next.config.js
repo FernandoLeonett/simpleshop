@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["drive.google.com"],
+    domains: ["https://drive.google.com/"],
   },
 };
