@@ -1,7 +1,8 @@
 import React from "react";
 import {GetStaticProps} from "next";
-import {Button, Flex, Image, Grid, Link, Stack, Text, Center} from "@chakra-ui/react";
+import {Button, Flex, Grid, Link, Stack, Text, chakra} from "@chakra-ui/react";
 import {motion, AnimatePresence, AnimateSharedLayout} from "framer-motion";
+import Image from "next/image";
 
 import {Product} from "../product/types";
 import api from "../product/api";
@@ -11,12 +12,12 @@ interface Props {
   products: Product[];
 }
 
-function parseCurrency(value: number): string {
+const parseCurrency = (value: number): string => {
   return value.toLocaleString("es-AR", {
     style: "currency",
     currency: "ARS",
   });
-}
+};
 
 const IndexRoute: React.FC<Props> = ({products}) => {
   const [cart, setCart] = React.useState<Product[]>([]);
@@ -34,6 +35,9 @@ const IndexRoute: React.FC<Props> = ({products}) => {
         ),
     [cart],
   );
+  const MyImage = chakra(Image, {
+    shouldForwardProp: (prop) => ["width", "height", "src", "alt"].includes(prop),
+  });
 
   return (
     <AnimateSharedLayout type="crossfade">
@@ -48,7 +52,7 @@ const IndexRoute: React.FC<Props> = ({products}) => {
               spacing={3}
             >
               <Stack spacing={1}>
-                <Image
+                <MyImage
                   alt={product.title}
                   as={motion.img}
                   borderTopRadius="md"
@@ -103,7 +107,9 @@ const IndexRoute: React.FC<Props> = ({products}) => {
             position="fixed"
             top={0}
             width="100%"
-            onClick={() => setSelectedImage(null)}
+            onClick={() => {
+              setSelectedImage(null);
+            }}
           >
             <Image key="image" src={selectedImage} />
           </Flex>
@@ -117,7 +123,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const products = await api.list();
 
   return {
-    revalidate: 10,
+    revalidate: 1000000,
+
     props: {
       products,
     },

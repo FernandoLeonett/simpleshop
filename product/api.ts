@@ -1,6 +1,7 @@
 import axios from "axios";
 import Papa from "papaparse";
 
+import {responseUrl} from "../utils/helper";
 import {urlCliente} from "../utils/userdata";
 
 import {Product} from "./types";
@@ -19,12 +20,13 @@ export default {
               complete: (results) => {
                 const products = results.data as Product[];
 
-                console.log(products);
+                // console.log(products);
 
                 return resolve(
                   products.map((product) => ({
                     ...product,
                     price: Number(product.price),
+                    image: responseUrl(product.image),
                   })),
                 );
               },
