@@ -1,8 +1,8 @@
 import React from "react";
 import {GetStaticProps} from "next";
-import {Button, Flex, Grid, Link, Stack, Text, chakra} from "@chakra-ui/react";
+import {Button, Flex, Image, Grid, Link, Stack, Text, chakra} from "@chakra-ui/react";
 import {motion, AnimatePresence, AnimateSharedLayout} from "framer-motion";
-import Image from "next/image";
+// import Image from "next/image";
 
 import {Product} from "../product/types";
 import api from "../product/api";
@@ -107,9 +107,7 @@ const IndexRoute: React.FC<Props> = ({products}) => {
             position="fixed"
             top={0}
             width="100%"
-            onClick={() => {
-              setSelectedImage(null);
-            }}
+            onClick={() => setSelectedImage(null)}
           >
             <Image key="image" src={selectedImage} />
           </Flex>
