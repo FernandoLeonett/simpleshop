@@ -4,7 +4,7 @@ import {Button, Flex, Grid, Link, Stack, Text, chakra} from "@chakra-ui/react";
 import {motion, AnimatePresence} from "framer-motion";
 import Image from "next/image";
 
-import {Product} from "../product/types";
+import {ItemCart, Product} from "../product/types";
 import api from "../product/api";
 import {whatshapNumber} from "../utils/userdata";
 
@@ -21,7 +21,7 @@ const parseCurrency = (value: number): string => {
 
 const IndexRoute: React.FC<Props> = ({products}) => {
   const [cart, setCart] = React.useState<Product[]>([]);
-  const [selectedImage, setSelectedImage] = React.useState<string>(null);
+  const [selectedProduct, setSelectedProduct] = React.useState<Product>(null);
   const text = React.useMemo(
     () =>
       cart
@@ -39,35 +39,31 @@ const IndexRoute: React.FC<Props> = ({products}) => {
     shouldForwardProp: (prop) => ["width", "height", "src", "alt", "onClick"].includes(prop),
   });
 
-  const container = {
-    hidden: {opacity: 0},
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.5,
-      },
-    },
-  };
-
-  const item = {
-    hidden: {opacity: 0, scale: 0},
-    show: {opacity: 1, scale: 1},
-  };
-
-  // return (
-  //   <motion.ul animate="show" initial="hidden" variants={container}>
-  //     <motion.li size={50} variants={item} />
-  //     <motion.li size={50} variants={item} />
-  //   </motion.ul>
-  // );
-
   return (
     <>
       <Stack spacing={6}>
-        <motion.ul animate="show" initial="hidden" variants={container}>
+        <motion.ul
+          animate="show"
+          initial="hidden"
+          variants={{
+            hidden: {opacity: 0},
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.5,
+              },
+            },
+          }}
+        >
           <Grid gridGap={6} templateColumns="repeat(auto-fill, minmax(240px, 1fr))">
             {products.map((product) => (
-              <motion.li key={product.id} variants={item}>
+              <motion.li
+                key={product.id}
+                variants={{
+                  hidden: {opacity: 0, scale: 0},
+                  show: {opacity: 1, scale: 1},
+                }}
+              >
                 <Stack backgroundColor="gray.100" borderRadius="md" padding={4} spacing={3}>
                   <Stack spacing={1}>
                     <MyImage
@@ -79,7 +75,7 @@ const IndexRoute: React.FC<Props> = ({products}) => {
                       maxHeight={128}
                       objectFit="cover"
                       src={product.image}
-                      onClick={() => setSelectedImage(product.image)}
+                      onClick={() => setSelectedProduct(product)}
                     />
                     <Text>{product.title}</Text>
                     <Text color="green.500" fontSize="sm" fontWeight="500">
@@ -87,10 +83,11 @@ const IndexRoute: React.FC<Props> = ({products}) => {
                     </Text>
                   </Stack>
                   <Button
+                    borderRadius={40}
                     colorScheme="primary"
                     size="sm"
                     variant="outline"
-                    onClick={() => setCart((cart) => cart.concat(product))}
+                    onClick={() => setCart((cart) => [...cart, product])}
                   >
                     Agregar
                   </Button>
@@ -114,31 +111,36 @@ const IndexRoute: React.FC<Props> = ({products}) => {
         )}
       </Stack>
       <AnimatePresence>
-        {selectedImage && (
-          <Flex
-            key="brackdrop"
-            alignItems="center"
-            as={motion.div}
-            backgroundColor="rgba(0,0,0,0.8)"
-            height="100%"
-            justifyContent="center"
-            layoutId={selectedImage}
-            left={0}
-            position="fixed"
-            top={0}
-            width="100%"
-            onClick={() => setSelectedImage(null)}
-          >
-            <MyImage
-              key="image"
-              alt={"titulo"}
-              as={motion.img}
-              borderRadius="md"
-              maxHeight={300}
-              objectFit="cover"
-              src={selectedImage}
-            />
-          </Flex>
+        {selectedProduct && (
+          <>
+            <Flex
+              key="brackdrop"
+              alignItems="center"
+              as={motion.div}
+              backgroundColor="rgba(0,0,0,0.8)"
+              height="100%"
+              justifyContent="center"
+              layoutId={selectedProduct.id}
+              left={0}
+              position="fixed"
+              top={0}
+              width="100%"
+              onClick={() => setSelectedProduct(null)}
+            >
+              <figure>
+                <MyImage
+                  key="image"
+                  alt={"titulo"}
+                  as={motion.img}
+                  borderRadius="md"
+                  maxHeight={300}
+                  objectFit="cover"
+                  src={selectedProduct.image}
+                />
+                <motion.caption>{selectedProduct.description}</motion.caption>
+              </figure>
+            </Flex>
+          </>
         )}
       </AnimatePresence>
     </>
