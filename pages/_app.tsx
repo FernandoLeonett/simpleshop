@@ -12,12 +12,14 @@ import {
 } from "@chakra-ui/react";
 import {AppProps} from "next/app";
 
+import NavBar from "../components/navbar";
 import theme from "../theme";
 
 const App: React.FC<AppProps> = ({Component, pageProps}) => {
   return (
     <ChakraProvider theme={theme}>
       <Box padding={4}>
+        <NavBar />
         <Container
           backgroundColor="white"
           borderRadius="sm"
