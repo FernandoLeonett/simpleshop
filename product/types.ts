@@ -7,10 +7,4 @@ export interface Product {
   price: number;
 }
 
-export interface ItemCart {
-  id: string;
-  title: string;
-  category: string;
-  description: string;
-  price: number;
-}
+

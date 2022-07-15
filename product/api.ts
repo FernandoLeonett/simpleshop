@@ -20,7 +20,7 @@ export default {
               complete: (results) => {
                 const products = results.data as Product[];
 
-                // console.log(products);
+
 
                 return resolve(
                   products.map((product) => ({

@@ -5,3 +5,10 @@ export const responseUrl = (url: string): string => {
 
   return urlBase + url.slice(start, end);
 };
+
+export const parseCurrency = (value: number): string => {
+  return value.toLocaleString("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  });
+};
