@@ -7,19 +7,17 @@ import api from "../product/api";
 import Animation from "../components/animation/Animation";
 import Whatsasap from '../components/whatsapp/Whatsaap'
 import List from '../components/List/List'
+import useShoping from "../context/context";
 
 
 interface Props {
   products: Product[];
 }
-
-
-
 const IndexRoute = ({ products }: Props): JSX.Element => {
-  const [cart, setCart] = React.useState<Product[]>([]);
-  const [selectedProduct, setSelectedProduct] = React.useState<Product>(null);
 
+  // const [selectedProduct, setSelectedProduct] = React.useState<Product>(null);
 
+const {selectedProduct, setSelectedProduct} = useShoping()
   return (
     <>
       <Stack spacing={6}>

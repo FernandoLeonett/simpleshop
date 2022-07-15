@@ -1,15 +1,15 @@
-import React from "react";
-import "../index.css"
+
+import "../styles/global.css"
 import {
   ChakraProvider,
 } from "@chakra-ui/react";
-import {AppProps} from "next/app";
+import  {AppProps} from "next/app";
 
 
 import LandingLayout from "../components/layouts/LandingLayout";
 import theme from "../theme";
 
-const App: React.FC<AppProps> = ({Component, pageProps}) => {
+const App = ({Component, pageProps}:AppProps):JSX.Element => {
   return(  <ChakraProvider theme={theme}>
     <LandingLayout>
       <Component Component {...pageProps} />

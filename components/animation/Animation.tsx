@@ -15,40 +15,43 @@ const Animation = ({
       ["width", "height", "src", "alt", "onClick"].includes(prop),
   });
   return (
-    <AnimatePresence>
-      {selectedProduct && (
-        <>
-          <Flex
-            direction={"column"}
-            key="brackdrop"
-            alignItems="center"
-            as={motion.div}
-            backgroundColor="rgba(0,0,0,0.8)"
-            height="100%"
-            justifyContent="center"
-            layoutId={selectedProduct.id}
-            left={0}
-            position="fixed"
-            top={0}
-            width="100%"
-            onClick={() => setSelectedProduct(null)}
-          >
-            <motion.figure>
-              <MyImage
-                key="image"
-                alt={"titulo"}
-                as={motion.img}
-                borderRadius="md"
-                maxHeight={300}
-                objectFit="cover"
-                src={selectedProduct.image}
-              />
-            </motion.figure>
-            <motion.caption>{selectedProduct.description}</motion.caption>
-          </Flex>
-        </>
-      )}
-    </AnimatePresence>
+
+      <AnimatePresence>
+        {selectedProduct && (
+          <>
+            <Flex
+              key={selectedProduct.id}
+              direction={"column"}
+              alignItems="center"
+              as={motion.div}
+              backgroundColor="rgba(0,0,0,0.8)"
+              height="100%"
+              justifyContent="center"
+              layoutId={selectedProduct.id}
+              left={0}
+              position="fixed"
+              top={0}
+              width="100%"
+              onClick={() => setSelectedProduct(null)}
+            >
+              <motion.figure>
+                <MyImage
+                  alt={"titulo"}
+                  as={motion.img}
+                  borderRadius="md"
+                  maxHeight={300}
+                  objectFit="cover"
+                  src={selectedProduct.image}
+                />
+                <motion.figcaption>
+                  {selectedProduct.description}
+                </motion.figcaption>
+              </motion.figure>
+            </Flex>
+          </>
+        )}
+      </AnimatePresence>
+
   );
 };
 

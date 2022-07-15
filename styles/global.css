@@ -6,7 +6,7 @@ figure {
   flex-direction: column;
   align-items: center;
 }
-caption {
+figcaption {
   width: 300px;
   color: #fff;
 }

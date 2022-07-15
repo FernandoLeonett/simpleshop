@@ -6,5 +6,11 @@ export interface Product {
   image: string;
   price: number;
 }
+export interface ItemCart{
+
+  item: Product;
+  quantity:number;
+}
+
 
 
