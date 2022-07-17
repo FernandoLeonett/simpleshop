@@ -1,25 +1,26 @@
-import React, { useContext } from "react";
-import { createContext } from "react";
-import { ItemCart } from "../product/types";
+import {useState, createContext, ReactNode, useContext} from "react";
 
+import {CartContextType} from "../interfaces/CartContextType";
+import CartItem from "../interfaces/CartItem";
+import Product from "../interfaces/Product";
 
+const shoppingContext = createContext({});
 
-const shoppingContext = createContext(undefined);
-
-
-const shoppingProvider=({children})=>{
-    const [cartList, setCartList] = React.useState<ItemCart[]>([]);
-    const store = {
-      cartList,
-      setCartList,
-    };
-
-
-  return(
-  <shoppingContext.Provider value={store}>
-    {children}
-  </shoppingContext.Provider>
-  )
+interface Props {
+  children: ReactNode;
 }
+export const ShoppingProvider = ({children}: Props): JSX.Element => {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<Product>(null);
 
-export default function useShoping(){ return useContext(shoppingContext)}
+  const storeCart = {
+    cart,
+    setCart,
+    selectedProduct,
+    setSelectedProduct,
+  };
+
+  return <shoppingContext.Provider value={storeCart}>{children}</shoppingContext.Provider>;
+};
+
+export const useShoping = () => useContext(shoppingContext) as CartContextType;

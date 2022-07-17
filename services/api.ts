@@ -1,10 +1,9 @@
 import axios from "axios";
 import Papa from "papaparse";
 
+import Product from "../interfaces/Product";
 import {responseUrl} from "../utils/helper";
 import {urlCliente} from "../utils/userdata";
-
-import {Product} from "./types";
 
 export default {
   list: async (): Promise<Product[]> => {
@@ -19,8 +18,6 @@ export default {
               header: true,
               complete: (results) => {
                 const products = results.data as Product[];
-
-
 
                 return resolve(
                   products.map((product) => ({

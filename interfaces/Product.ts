@@ -1,4 +1,4 @@
-export interface Product {
+export default interface Product {
   id: string;
   title: string;
   category: string;
@@ -6,11 +6,3 @@ export interface Product {
   image: string;
   price: number;
 }
-export interface ItemCart{
-
-  item: Product;
-  quantity:number;
-}
-
-
-
