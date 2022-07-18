@@ -1,6 +1,5 @@
 import {Grid} from "@chakra-ui/react";
 import {motion} from "framer-motion";
-import {memo} from "react";
 
 import Product from "../../interfaces/Product";
 import Item from "../item/item";
