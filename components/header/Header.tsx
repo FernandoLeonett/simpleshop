@@ -1,14 +1,17 @@
 import React from "react";
-import { Flex } from "@chakra-ui/react";
+import Image from "next/image";
+import {chakra, Flex} from "@chakra-ui/react";
 
-
-const Header = (props:Object):JSX.Element => {
+const Header = (props: Object): JSX.Element => {
+  const customImage = chakra(Image, {
+    shouldForwardProp: (prop) => ["width", "height", "src", "alt"].includes(prop),
+  });
 
   return (
     <Flex
       align="center"
-      as="nav"
-      bg={["primary.500", "primary.500", "primary.300", "primary.300"]}
+      as="header"
+      bg={"primary.300"}
       color={["white", "white", "primary.700", "primary.700"]}
       justify="space-between"
       mb={8}
@@ -23,9 +26,8 @@ const Header = (props:Object):JSX.Element => {
         justify={["center", "space-between", "flex-end", "flex-end"]}
         pt={[4, 4, 0, 0]}
       >
-        Create Account
+        <customImage alt="logo" height="30rem" src="/img/logo.png" width="30rem" />
       </Flex>
-
     </Flex>
   );
 };

@@ -1,11 +1,12 @@
 import React from "react";
-import Header from "../header/Header"
+import {Box, VStack, Heading, Divider, Container, Image, Text} from "@chakra-ui/react";
 
-import {Box, VStack, Heading, Divider, Container, Image, Text} from '@chakra-ui/react'
-interface Props{
-  contenido: React.ReactNode
+import Header from "../header/Header";
+
+interface Props {
+  contenido: React.ReactNode;
 }
-const HomeContent = ({contenido}:Props):JSX.Element => {
+const HomeContent = ({contenido}: Props): JSX.Element => {
   return (
     <Box padding={4}>
       <Header />
@@ -18,16 +19,13 @@ const HomeContent = ({contenido}:Props):JSX.Element => {
           padding={4}
         >
           <VStack marginBottom={6}>
-            <Image
-              borderRadius={9999}
-              src="https://unsplash.com/es/fotos/-YHSwy6uqvk"
-            />
-            <Heading>Esta es tu tienda</Heading>
-            <Text>Bienvenido</Text>
+            {/* <Image borderRadius={9999} src="https://unsplash.com/es/fotos/-YHSwy6uqvk" /> */}
+            <Heading>Banner</Heading>
+            {/* <Text>Bienvenido</Text> */}
           </VStack>
 
           {contenido}
-          <Divider marginY={6} />
+          {/* <Divider marginY={6} /> */}
         </Container>
       </main>
     </Box>
