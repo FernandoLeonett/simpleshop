@@ -22,7 +22,7 @@ interface Props {
 
 const search = ({ setProductsState }: Props) => {
 
- const {search, setSearch}=useShoping()
+  const [search, setSearch] = useState("");
 
   const handlerResfresh = (e) => {
     setSearch(() => "");
@@ -57,7 +57,7 @@ const search = ({ setProductsState }: Props) => {
         <Input
           name="filteredProducts"
           value={search}
-          htmlSize={60}
+          htmlSize={30}
           placeholder="buscar productos"
           onChange={handleChangeSearch}
         />

@@ -11,6 +11,7 @@ import api from "../services/api";
 import Product from "../interfaces/Product";
 import ProductState from "../interfaces/ProductState";
 import style from "../styles/home.module.css"
+
 interface Props {
   initialProducts: Product[];
 }
