@@ -25,8 +25,7 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
 
   return (
     <>
-      <Heading className ={style.title}>Bienvenidos a mi tienda</Heading>
-
+      
       <Search setProductsState={setproductsState} />
 
       <Stack spacing={6}>
