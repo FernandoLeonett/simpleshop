@@ -11,7 +11,6 @@ import api from "../services/api";
 import Product from "../interfaces/Product";
 import ProductState from "../interfaces/ProductState";
 import style from "../styles/home.module.css"
-import { useShoping } from "../context/context";
 interface Props {
   initialProducts: Product[];
 }
@@ -23,13 +22,11 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
   });
   const { cart } = useCart();
 
-  // const { search, setSearch } = useShoping()
-
   return (
     <>
       <Heading className ={style.title}>Bienvenidos a mi tienda</Heading>
 
-      <Search setProductsState={setproductsState}/>
+      <Search setProductsState={setproductsState} />
 
       <Stack spacing={6}>
         <List products={stateProducts.filteredProducts} />

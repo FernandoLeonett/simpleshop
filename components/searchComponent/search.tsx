@@ -13,7 +13,7 @@ import { filter } from "../../utils/helper";
 
 import { Search2Icon } from "@chakra-ui/icons";
 import ProductState from "../../interfaces/ProductState";
-import { useDebounce } from "../../hooks/useDebounce";
+
 import { useShoping } from "../../context/context";
 
 interface Props {
@@ -28,19 +28,25 @@ const search = ({ setProductsState }: Props) => {
     setSearch(() => "");
     setProductsState((prev) => ({ ...prev, [e.target.name]: prev.products }));
   };
-  // const debounced = useDebounce(search, 300)
+
   const handleChangeSearch = (e) => {
     setSearch(() => e.target.value);
   };
-  useEffect(() => {
-    const filtering = (search: string) => {
-      setProductsState((prev) => ({
-        ...prev,
-        filteredProducts: filter(search, prev.products),
-      }));
-    };
 
-    filtering(search);
+  const filtering = (search: string) => {
+    setProductsState((prev) => ({
+      ...prev,
+      filteredProducts: filter(search, prev.products),
+    }))
+  };
+  useEffect(() => {
+      const handler = setTimeout(() => {
+        filtering(search);
+      }, 500);
+
+  return () => {
+      clearTimeout(handler);
+    };
   }, [search]);
 
 
