@@ -1,14 +1,27 @@
 import React from "react";
-import Header from "../header/Header"
+import {FaSearch} from "react-icons/fa";
+import {
+  Icon,
+  Box,
+  VStack,
+  Heading,
+  Divider,
+  Container,
+  Image,
+  Text,
+  Input,
+  InputLeftAddon,
+  InputGroup,
+  InputRightAddon,
+} from "@chakra-ui/react";
 
-import {Box, VStack, Heading, Divider, Container, Image, Text} from '@chakra-ui/react'
-interface Props{
-  contenido: React.ReactNode
+interface Props {
+  contenido: React.ReactNode;
 }
-const HomeContent = ({contenido}:Props):JSX.Element => {
+const HomeContent = ({contenido}: Props): JSX.Element => {
   return (
     <Box padding={4}>
-      <Header />
+      <Divider marginY={6} />
       <main>
         <Container
           backgroundColor="white"
@@ -17,17 +30,7 @@ const HomeContent = ({contenido}:Props):JSX.Element => {
           maxWidth="container.xl"
           padding={4}
         >
-          <VStack marginBottom={6}>
-            <Image
-              borderRadius={9999}
-              src="https://unsplash.com/es/fotos/-YHSwy6uqvk"
-            />
-            <Heading>Esta es tu tienda</Heading>
-            <Text>Bienvenido</Text>
-          </VStack>
-
           {contenido}
-          <Divider marginY={6} />
         </Container>
       </main>
     </Box>

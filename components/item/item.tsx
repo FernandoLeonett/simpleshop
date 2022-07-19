@@ -29,7 +29,7 @@ const Item = ({product}: Props): JSX.Element => {
 
   return (
     <motion.li key={product.id} variants={itemEffect}>
-      <Stack backgroundColor="gray.100" borderRadius="md" padding={4} spacing={3}>
+      <Stack backgroundColor="orange.100" borderRadius="md" padding={4} spacing={3}>
         <Stack spacing={1}>
           <MyImage
             alt={product.title}
@@ -37,13 +37,13 @@ const Item = ({product}: Props): JSX.Element => {
             borderTopRadius="md"
             cursor={"pointer"}
             layoutId={product.image}
-            maxHeight={128}
+            minHeight={128}
             objectFit="cover"
             src={product.image}
             onClick={() => setSelectedProduct(product)}
           />
           <Text>{product.title}</Text>
-          <Text color="green.500" fontSize="sm" fontWeight="500">
+          <Text color="orange.500" fontSize="sm" fontWeight="500">
             {parseCurrency(product.price)}
           </Text>
         </Stack>

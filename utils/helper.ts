@@ -1,4 +1,5 @@
 import CartItem from "../interfaces/CartItem";
+import Product from "../interfaces/Product";
 
 export const responseUrl = (url: string): string => {
   const urlBase = "http://drive.google.com/uc?export=view&id=";
@@ -20,9 +21,9 @@ export const textMessage = (cart: CartItem[]) => {
 
   cart.forEach((item) => {
     msg += `${item.product.title} -Precio Unitario:  ${parseCurrency(
-      item.product.price,
+      item.product.price
     )} -unidades: ${item.quantityUnits} subtotal: ${parseCurrency(
-      subTotal(item.product.id, cart),
+      subTotal(item.product.id, cart)
     )}\n`;
   });
   msg += `Monto a pagar: ${parseCurrency(totalPrice(cart))}`;
@@ -46,3 +47,50 @@ export const getNumberOfItems = (cart: CartItem[]) => {
 
 const totalPrice = (cart: CartItem[]) =>
   cart.reduce((sum, item) => sum + subTotal(item.product.id, cart), 0);
+
+export const filter = (text: string, products: Product[]) => {
+  const filteredProducts = [];
+
+  products.forEach((product) => {
+    if (
+      ignoreAccentAndCase(product.description).includes(
+        ignoreAccentAndCase(text)
+      ) ||
+      ignoreAccentAndCase(product.title).includes(text)
+    ) {
+      if (!filteredProducts.some((p) => p.id === product.id)) {
+        filteredProducts.push(product);
+      }
+    }
+  });
+
+  return filteredProducts;
+};
+
+
+export const ignoreAccentAndCase = (pValue) => {
+  const value = pValue.replaceAll(" ", "").toLocaleLowerCase();
+  const arr = [...value].map((ch) => repalceAccents(ch)).join();
+  return arr;
+};
+
+const repalceAccents = (value) => {
+  switch (value) {
+    case "á":
+      return "a";
+    case "é":
+      return "e";
+    case "í":
+      return "i";
+    case "ó":
+      return "o";
+    case "ú":
+      return "u";
+    case "ü":
+      return "u";
+    default:
+      return value;
+  }
+};
+
+

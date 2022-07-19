@@ -1,17 +1,29 @@
-import React, { Children } from "react";
+import {Heading, VStack} from "@chakra-ui/react";
 
+import Search from "../searchComponent/search";
 import HomeContent from "../custom_style_component/HomeContent";
+import Footer from "../FooterComponent/footerComponent";
+import Header from "../header/Header";
 interface Props {
   children: React.ReactNode;
 }
 
-export default function ({ children }: props): JSX.Element {
+function Layout({children}: Props): JSX.Element {
   return (
-    <div>
-      <HomeContent contenido={children} />
+    <>
+      <Header />
+      <VStack marginBottom={6}>
+        {/* <Image borderRadius={9999} src="https://unsplash.com/es/fotos/-YHSwy6uqvk" /> */}
 
-      <footer />
 
-    </div>
+        {/* <Text>Bienvenido</Text> */}
+      </VStack>
+      <HomeContent contenido={children} />;
+
+
+      <Footer />
+    </>
   );
 }
+
+export default Layout;

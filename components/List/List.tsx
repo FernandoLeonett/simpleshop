@@ -4,10 +4,10 @@ import {motion} from "framer-motion";
 import Product from "../../interfaces/Product";
 import Item from "../item/item";
 
-interface Props {
+interface ProductsList {
   products: Product[];
 }
-const List = ({products}: Props): JSX.Element => (
+const List = ({ products }: ProductsList): JSX.Element => (
   <motion.ul
     animate="show"
     initial="hidden"

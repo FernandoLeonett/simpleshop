@@ -1,23 +1,38 @@
-import {Stack} from "@chakra-ui/react";
-import {GetStaticProps} from "next";
+import { Heading, Stack } from "@chakra-ui/react";
+import { GetStaticProps } from "next";
+import { useState } from "react";
 
 import List from "../components/List/List";
+import Search from "../components/searchComponent/search";
 import Animation from "../components/animation/Animation";
 import Whatsasap from "../components/whatsapp/Whatsaap";
 import useCart from "../hooks/useCart";
 import api from "../services/api";
 import Product from "../interfaces/Product";
-
+import ProductState from "../interfaces/ProductState";
+import style from "../styles/home.module.css"
+import { useShoping } from "../context/context";
 interface Props {
-  products: Product[];
+  initialProducts: Product[];
 }
-const IndexRoute = ({products}: Props): JSX.Element => {
-  const {cart} = useCart();
+
+const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
+  const [stateProducts, setproductsState] = useState<ProductState>({
+    products: initialProducts,
+    filteredProducts: initialProducts,
+  });
+  const { cart } = useCart();
+
+  // const { search, setSearch } = useShoping()
 
   return (
     <>
+      <Heading className ={style.title}>Bienvenidos a mi tienda</Heading>
+
+      <Search setProductsState={setproductsState}/>
+
       <Stack spacing={6}>
-        <List products={products} />
+        <List products={stateProducts.filteredProducts} />
 
         {cart.length > 0 && <Whatsasap />}
       </Stack>
@@ -27,13 +42,13 @@ const IndexRoute = ({products}: Props): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const products = await api.list();
+  const initialProducts = await api.list();
 
   return {
     revalidate: 155,
 
     props: {
-      products,
+      initialProducts,
     },
   };
 };
