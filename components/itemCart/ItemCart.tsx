@@ -7,6 +7,9 @@ import {
   StackDivider,
   Heading,
   Text,
+  Icon,
+  Button,
+  Tooltip,
 } from "@chakra-ui/react";
 import CartItem from "../../interfaces/CartItem";
 import { parseCurrency, subTotal } from "../../utils/helper";
@@ -65,9 +68,9 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
           </Box>
         </VStack>
         <Box>
-          <AddIcon onClick={onMore} />
-
-          {
+          <Tooltip label={"esta desbiltado"}>
+            <Button disabled>Submit</Button>
+          </Tooltip>          {
             itemCart.quantityUnits>0 && <MinusIcon onClick={onMinus} />
           }
 
