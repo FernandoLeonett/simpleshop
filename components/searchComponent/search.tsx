@@ -74,30 +74,7 @@ const search = ({ setProductsState }: Props) => {
           </Tooltip>
 
         </InputLeftElement>
-        <InputRightElement>
-          <IconButton
-            onClick={handlerResfresh}
-            variant="unstyled"
-            aria-label={"Search database"}
-            isRound
-            _focus={{
-              boxShadow: " 0 0 3px rgba(255, 195, 0, 0.5 )"
-            }}
-          >
-            {/* <Center>
-              <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" />
-            </Center> */}
 
-
-            <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" />
-
-
-            {/* <img
-              src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-refresh-arrows-dreamstale-lineal-dreamstale.png"
-              width={"2rem"}
-            /> */}
-          </IconButton>
-        </InputRightElement>
       </InputGroup>
     </HStack>
   );

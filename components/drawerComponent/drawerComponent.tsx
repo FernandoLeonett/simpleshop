@@ -8,10 +8,14 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Text,
+  HStack,
+  Box,
+  VStack,
+  Stack,
 } from "@chakra-ui/react";
 import CartItem from "../itemCart/ItemCart"
 import useCart from "../../hooks/useCart";
-import {parseCurrency, totalPrice} from "../../utils/helper"
+import {getNumberOfItems, parseCurrency, totalPrice} from "../../utils/helper"
 import { useShoping } from "../../context/context";
 import Whatsasap from "../../components/whatsapp/Whatsaap"
 
@@ -21,11 +25,15 @@ const DrawerComponent = () => {
   const { cart } = useCart()
 
   return (
-    <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
+    <Drawer size={"sm"} placement={"right"} onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
       <DrawerContent>
         <DrawerHeader>
-          <Whatsasap />
+          <HStack>
+            <Box>
+              <Text>{getNumberOfItems(cart)} articulos</Text>
+            </Box>
+          </HStack>
         </DrawerHeader>
         <DrawerCloseButton
           color={"primary.500"}
@@ -39,11 +47,20 @@ const DrawerComponent = () => {
           Tu compra
         </DrawerHeader>
         <DrawerBody>
-          {cart.map((item) => <CartItem itemCart={{ ...item }} />)}
+          {cart.map((item) => <CartItem key ={item.product.id} itemCart={item } />)}
 
         </DrawerBody>
         <DrawerFooter borderTopWidth="1px">
-          <Text color={"primary.500"}>Total: {parseCurrency(totalPrice(cart))}</Text>
+          <HStack>
+
+        <Stack>
+
+              <Text >Total: {parseCurrency(totalPrice(cart))}</Text>
+          <HStack>
+                <Text> Pagar con:  </Text>  <Whatsasap />
+          </HStack>
+        </Stack>
+          </HStack>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>)
