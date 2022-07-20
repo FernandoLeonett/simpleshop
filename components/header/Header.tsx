@@ -6,7 +6,8 @@ import {FaShoppingCart} from "react-icons/fa";
 import {FiShoppingCart} from "react-icons/fi"
 import {BsShopWindow} from "react-icons/bs";
 // Drawer
-import { useDisclosure } from "@chakra-ui/react";   
+import { useDisclosure } from "@chakra-ui/react";
+import DrawerComponent from "../DrawerComponent/DrawerComponent";
 
 const Header = (): JSX.Element => {
 const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,9 +38,10 @@ const { isOpen, onOpen, onClose } = useDisclosure();
           // mr={30}
           w={9}
           color={"whiteAlpha.900"}
-          onClick={() => {onOpen}}
+          cursor={"pointer"}
+          onClick={() => {onOpen()}}
         />
-        <drawerComponent onCLose={onClose}/>
+        <DrawerComponent isOpen={isOpen} onClose={onClose}/>
         <Text
           alignSelf={"end"}
           color={"whiteAlpha.900"}
