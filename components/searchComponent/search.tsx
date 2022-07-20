@@ -53,7 +53,7 @@ const search = ({ setProductsState }: Props) => {
 
 
   return (
-    <HStack mx={20} mb={5}>
+    <HStack my={"2rem"} mx={["0rem", "2rem"]}>
       <InputGroup>
         <Input
           name="filteredProducts"
@@ -74,7 +74,7 @@ const search = ({ setProductsState }: Props) => {
           </Tooltip>
 
         </InputLeftElement>
-        <InputRightElement>
+        {/* <InputRightElement>
           <IconButton
             onClick={handlerResfresh}
             variant="unstyled"
@@ -83,21 +83,21 @@ const search = ({ setProductsState }: Props) => {
             _focus={{
               boxShadow: " 0 0 3px rgba(255, 195, 0, 0.5 )"
             }}
-          >
+          > */}
             {/* <Center>
               <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" />
             </Center> */}
 
 
-            <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" />
+            {/* <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" /> */}
 
 
             {/* <img
               src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-refresh-arrows-dreamstale-lineal-dreamstale.png"
               width={"2rem"}
             /> */}
-          </IconButton>
-        </InputRightElement>
+          {/* </IconButton>
+        </InputRightElement> */}
       </InputGroup>
     </HStack>
   );

@@ -7,7 +7,8 @@ figure {
   align-items: center;
 }
 figcaption {
-  width: 300px;
+  padding-top: 1rem;
+  max-width: fit-content;
   color: #fff;
 }
 

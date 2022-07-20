@@ -21,13 +21,13 @@ interface Props {
 const HomeContent = ({contenido}: Props): JSX.Element => {
   return (
     <Box padding={4}>
-      <Divider marginY={6} />
+      {/* <Divider marginY={6} /> */}
       <main>
         <Container
           backgroundColor="white"
           borderRadius="sm"
           boxShadow="md"
-          maxWidth="container.xl"
+          maxWidth="container.lg"
           padding={4}
         >
           {contenido}

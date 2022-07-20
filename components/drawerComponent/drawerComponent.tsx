@@ -23,9 +23,6 @@ const DrawerComponent = () => {
     <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerHeader>
-          <Whatsasap />
-        </DrawerHeader>
         <DrawerCloseButton
           color={"primary.500"}
           _focus={{
@@ -38,14 +35,19 @@ const DrawerComponent = () => {
           Tu compra
         </DrawerHeader>
         <DrawerBody>
-          {cart.map((item) => <CartItem itemCart={{ ...item }} />)}
-
+          {cart.map((item) => (
+            <CartItem itemCart={{ ...item }} />
+          ))}
         </DrawerBody>
         <DrawerFooter borderTopWidth="1px">
-          <Text color={"primary.500"}>Total: {parseCurrency(totalPrice(cart))}</Text>
+          <Text color={"primary.500"}>
+            Total: {parseCurrency(totalPrice(cart))}
+          </Text>
         </DrawerFooter>
+        <Whatsasap />
       </DrawerContent>
-    </Drawer>)
+    </Drawer>
+  );
 }
 
 
