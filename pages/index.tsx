@@ -9,8 +9,7 @@ import useCart from "../hooks/useCart";
 import api from "../services/api";
 import Product from "../interfaces/Product";
 import ProductState from "../interfaces/ProductState";
-
-
+import Swiper from "../components/Swiper/Swiper"
 import DrawerComponent from "../components/drawerComponent/DrawerComponent";
 
 interface Props {
@@ -26,15 +25,13 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
 
   return (
     <>
-
+      <Swiper products={stateProducts.filteredProducts} />
       <Search setProductsState={setproductsState} />
 
-      <Stack spacing={6}>
+      {/* <Stack spacing={6}> */}
         <List products={stateProducts.filteredProducts} />
-
-
-        <DrawerComponent  />
-      </Stack>
+        <DrawerComponent />
+      {/* </Stack> */}
       <Animation />
     </>
   );

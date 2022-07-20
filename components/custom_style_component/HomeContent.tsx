@@ -14,6 +14,8 @@ import {
   InputGroup,
   InputRightAddon,
 } from "@chakra-ui/react";
+import Search from "../searchComponent/search";
+
 
 interface Props {
   contenido: React.ReactNode;
@@ -23,6 +25,10 @@ const HomeContent = ({contenido}: Props): JSX.Element => {
     <Box padding={4}>
       {/* <Divider marginY={6} /> */}
       <main>
+        {/* <Heading textAlign={"center"} py={20}>
+          Banner
+        </Heading> */}
+
         <Container
           backgroundColor="white"
           borderRadius="sm"

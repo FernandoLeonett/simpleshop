@@ -11,7 +11,7 @@ function Layout({children}: Props): JSX.Element {
   return (
     <>
       <Header />
-      <Heading textAlign={"center"} py={20}>Banner</Heading>
+      
       {/* <VStack marginBottom={6}> */}
       {/* <Image borderRadius={9999} src="https://unsplash.com/es/fotos/-YHSwy6uqvk" /> */}
       {/* <Text>Bienvenido</Text> */}

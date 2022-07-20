@@ -7,10 +7,16 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Text,
+  HStack,
+  Box,
+  VStack,
+  Stack,
+  Divider,
+  Flex,
 } from "@chakra-ui/react";
 import CartItem from "../itemCart/ItemCart"
 import useCart from "../../hooks/useCart";
-import {parseCurrency, totalPrice} from "../../utils/helper"
+import {getNumberOfItems, parseCurrency, totalPrice} from "../../utils/helper"
 import { useShoping } from "../../context/context";
 import Whatsasap from "../../components/whatsapp/Whatsaap"
 
@@ -20,31 +26,44 @@ const DrawerComponent = () => {
   const { cart } = useCart()
 
   return (
-    <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
+    <Drawer size={"sm"} placement={"right"} onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
       <DrawerContent>
-        <DrawerCloseButton
-          color={"primary.500"}
-          _focus={{
-            border: "none",
-            background: "primary.50",
-            boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
-          }}
-        />
-        <DrawerHeader borderBottomWidth="1px" color={"primary.500"}>
-          Tu compra
+        <DrawerHeader borderBottomWidth="1px">
+          <DrawerCloseButton
+            color={"primary.500"}
+            _focus={{
+              border: "none",
+              background: "primary.50",
+              boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
+            }}
+          />
+          <Text color={"primary.500"}>Tu compra</Text>
+          <Text fontWeight={"thin"}>{getNumberOfItems(cart)} articulos</Text>
         </DrawerHeader>
         <DrawerBody>
           {cart.map((item) => (
-            <CartItem itemCart={{ ...item }} />
+            <>
+              <CartItem key={item.product.id} itemCart={item} />
+              <Divider />
+            </>
           ))}
         </DrawerBody>
         <DrawerFooter borderTopWidth="1px">
-          <Text color={"primary.500"}>
-            Total: {parseCurrency(totalPrice(cart))}
-          </Text>
+          <Flex
+            width={"100%"}
+            justifyContent={"space-between"}
+          >
+            <Box fontWeight={"bold"}>
+              <Text>Total: </Text>
+              <Text> Pagar con: </Text>
+            </Box>
+            <Box>
+              {parseCurrency(totalPrice(cart))}
+              <Whatsasap />
+            </Box>
+          </Flex>
         </DrawerFooter>
-        <Whatsasap />
       </DrawerContent>
     </Drawer>
   );

@@ -7,17 +7,30 @@ import {
   StackDivider,
   Heading,
   Text,
+  Flex,
+  Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Center,
+  Button,
+  IconButton,
 } from "@chakra-ui/react";
 import CartItem from "../../interfaces/CartItem";
 import { parseCurrency, subTotal } from "../../utils/helper";
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { AddIcon, MinusIcon, DeleteIcon } from "@chakra-ui/icons";
 import useCart from "../../hooks/useCart";
 interface Prop {
   itemCart: CartItem;
 }
 
 const ItemCart = ({ itemCart }: Prop): JSX.Element => {
-  const { cart, setCart } = useCart();
+  const { cart, setCart, removeItem } = useCart();
 
   const onMinus=()=>{
     const updateItem = {...itemCart}
@@ -40,38 +53,87 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
 
   return (
     <Stack>
-      <HStack justify={"space-around"}>
-        <Image
-          borderRadius="full"
-          boxSize="50px"
-          mr={30}
-          src={itemCart.product.image}
-        />
-
-        <VStack>
-          <Box>
-            <Text textAlign={"center"}> {itemCart.product.title}</Text>
+      <HStack justify={"space-around"} py={"0.5rem"}>
+        <Box>
+          <Image
+            borderRadius="full"
+            boxSize="5rem"
+            // mr={30}
+            src={itemCart.product.image}
+          />
+          <Flex justifyContent={"space-around"} mt={"0.5rem"}>
+            <IconButton
+              onClick={onMore}
+              aria-label={""}
+              size={"xs"}
+              _focus={{
+                border: "none",
+                color: "primary.500",
+              }}
+            >
+              <AddIcon fontSize={"sm"} />
+            </IconButton>
+            <Text fontSize={"lg"}>{itemCart.quantityUnits}</Text>
+            <IconButton
+              onClick={onMinus}
+              aria-label={""}
+              size={"xs"}
+              disabled={itemCart.quantityUnits === 1}
+              _focus={{
+                border: "none",
+                color: "primary.500",
+              }}
+            >
+              <MinusIcon fontSize={"sm"} />
+            </IconButton>
+          </Flex>
+        </Box>
+        <Box>
+          <Center>
+            <Text color={"primary.900"}>{itemCart.product.title}</Text>
+          </Center>
+          <TableContainer>
+            <Table variant="unstyled" size={"sm"}>
+              {/* <Thead>
+              <Tr>
+                <Th>{itemCart.product.title}</Th>
+              </Tr>
+            </Thead> */}
+              <Tbody>
+                <Tr>
+                  <Td>Precio unitario</Td>
+                  <Td isNumeric>{parseCurrency(itemCart.product.price)}</Td>
+                </Tr>
+              </Tbody>
+              <Tfoot>
+                <Tr>
+                  <Th>Subtotal</Th>
+                  <Th>${subTotal(itemCart.product.id, cart)}</Th>
+                </Tr>
+              </Tfoot>
+            </Table>
+          </TableContainer>
+        </Box>
+        {/* <Box>
+            <Text color="primary.900"> {itemCart.product.title}</Text>
           </Box>
           <Box>
-            <Text textAlign={"start"}>
-              Precio: {parseCurrency(itemCart.product.price)}
-            </Text>
+            <Text>Precio: {parseCurrency(itemCart.product.price)}</Text>
           </Box>
           <Text>cant: {itemCart.quantityUnits} unids.</Text>
           <Box>
-            <Text textAlign={"start"}>
-              subtotal: {subTotal(itemCart.product.id, cart)}
-            </Text>
-          </Box>
-        </VStack>
-        <Box>
-          <AddIcon onClick={onMore} />
-
-          {
-            itemCart.quantityUnits>0 && <MinusIcon onClick={onMinus} />
-          }
-
-        </Box>
+            <Text>subtotal: {subTotal(itemCart.product.id, cart)}</Text>
+          </Box> */}
+        <IconButton
+        aria-label=""
+          onClick={() => removeItem(itemCart.product.id)}
+          _focus={{
+            border: "none",
+            color:"primary.500",
+          }}
+        >
+          <DeleteIcon alignSelf={"center"} fontSize={"lg"} />
+        </IconButton>
       </HStack>
       {/* divider = {<StackDivider borderColor="gray.200" />} */}
     </Stack>
