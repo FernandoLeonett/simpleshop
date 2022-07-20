@@ -45,7 +45,7 @@ export const getNumberOfItems = (cart: CartItem[]) => {
   return total;
 };
 
-export const totalPrice = (cart: CartItem[]) =>
+ export const totalPrice = (cart: CartItem[]) =>
   cart.reduce((sum, item) => sum + subTotal(item.product.id, cart), 0);
 
 export const filter = (text: string, products: Product[]) => {
@@ -56,7 +56,7 @@ export const filter = (text: string, products: Product[]) => {
       ignoreAccentAndCase(product.description).includes(
         ignoreAccentAndCase(text)
       ) ||
-      ignoreAccentAndCase(product.title).includes(text)
+      ignoreAccentAndCase(product.title).includes(ignoreAccentAndCase(text))
     ) {
       if (!filteredProducts.some((p) => p.id === product.id)) {
         filteredProducts.push(product);
@@ -69,8 +69,9 @@ export const filter = (text: string, products: Product[]) => {
 
 
 export const ignoreAccentAndCase = (pValue) => {
-  const value = pValue.replaceAll(" ", "").toLocaleLowerCase();
-  const arr = [...value].map((ch) => repalceAccents(ch)).join();
+
+  const arr = [...pValue].map((ch) => repalceAccents(ch)).join().replaceAll(" ", "").replaceAll(",", "").toLocaleLowerCase();
+  console.log(arr)
   return arr;
 };
 
