@@ -1,17 +1,16 @@
-import { Heading, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { useState } from "react";
 
 import List from "../components/List/List";
 import Search from "../components/searchComponent/search";
 import Animation from "../components/animation/Animation";
-import Whatsasap from "../components/whatsapp/Whatsaap";
 import useCart from "../hooks/useCart";
 import api from "../services/api";
 import Product from "../interfaces/Product";
 import ProductState from "../interfaces/ProductState";
-import style from "../styles/home.module.css"
-import { useShoping } from "../context/context";
+
+
 import DrawerComponent from "../components/drawerComponent/DrawerComponent";
 
 interface Props {
