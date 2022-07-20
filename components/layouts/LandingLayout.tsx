@@ -1,7 +1,7 @@
 import {Heading, VStack} from "@chakra-ui/react";
 import Search from "../searchComponent/search";
 import HomeContent from "../custom_style_component/HomeContent";
-import Footer from "../FooterComponent/footerComponent";
+import Footer from "../footerComponent/footerComponent";
 import Header from "../header/Header";
 interface Props {
   children: React.ReactNode;

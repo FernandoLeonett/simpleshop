@@ -8,16 +8,26 @@ import {
   DrawerCloseButton,
   Text,
 } from "@chakra-ui/react";
+import CartItem from "../itemCart/ItemCart"
+import useCart from "../../hooks/useCart";
+import {parseCurrency, totalPrice} from "../../utils/helper"
+import { useShoping } from "../../context/context";
+import Whatsasap from "../../components/whatsapp/Whatsaap"
 
-const DrawerComponent = ({isOpen, onClose}) => {
-  // const [placement, setPlacement] = useState("right");
+const DrawerComponent = () => {
+
+  const { isOpen, onClose } = useShoping()
+  const { cart } = useCart()
 
   return (
     <Drawer placement={"right"} onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
       <DrawerContent>
+        <DrawerHeader>
+          <Whatsasap />
+        </DrawerHeader>
         <DrawerCloseButton
-        color={"primary.500"}
+          color={"primary.500"}
           _focus={{
             border: "none",
             background: "primary.50",
@@ -28,16 +38,15 @@ const DrawerComponent = ({isOpen, onClose}) => {
           Tu compra
         </DrawerHeader>
         <DrawerBody>
-          <p>product 1</p>
-          <p>product 2</p>
-          <p>product 3</p>
+          {cart.map((item) => <CartItem itemCart={{ ...item }} />)}
+
         </DrawerBody>
         <DrawerFooter borderTopWidth="1px">
-          <Text color={"primary.500"}>Total: 1234</Text>
+          <Text color={"primary.500"}>Total: {parseCurrency(totalPrice(cart))}</Text>
         </DrawerFooter>
       </DrawerContent>
-    </Drawer>
-  );
-};
+    </Drawer>)
+}
+
 
 export default DrawerComponent;

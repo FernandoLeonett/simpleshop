@@ -5,13 +5,13 @@ import {Box, chakra, Flex, HStack, VStack} from "@chakra-ui/react";
 import {FaShoppingCart} from "react-icons/fa";
 import {FiShoppingCart} from "react-icons/fi"
 import {BsShopWindow} from "react-icons/bs";
+import DrawerComponent from "../drawerComponent/DrawerComponent"
 // Drawer
 import { useDisclosure } from "@chakra-ui/react";
-import DrawerComponent from "../DrawerComponent/DrawerComponent";
+import { useShoping } from "../../context/context";
 
 const Header = (): JSX.Element => {
-const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { onOpen } = useShoping();
   return (
     <Flex
       height={"6rem"}
@@ -41,7 +41,7 @@ const { isOpen, onOpen, onClose } = useDisclosure();
           cursor={"pointer"}
           onClick={() => {onOpen()}}
         />
-        <DrawerComponent isOpen={isOpen} onClose={onClose}/>
+
         <Text
           alignSelf={"end"}
           color={"whiteAlpha.900"}
@@ -56,3 +56,5 @@ const { isOpen, onOpen, onClose } = useDisclosure();
 };
 
 export default Header;
+
+

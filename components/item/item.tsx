@@ -63,7 +63,12 @@ const Item = ({product}: Props): JSX.Element => {
             border: "none",
             background: "primary.50",
             boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
+
           }}
+          _visited={{
+            background: "primary.50",
+            boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
+}}
         >
           Agregar
         </Button>

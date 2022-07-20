@@ -1,16 +1,17 @@
-import { Heading, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { useState } from "react";
 
 import List from "../components/List/List";
 import Search from "../components/searchComponent/search";
 import Animation from "../components/animation/Animation";
-import Whatsasap from "../components/whatsapp/Whatsaap";
 import useCart from "../hooks/useCart";
 import api from "../services/api";
 import Product from "../interfaces/Product";
 import ProductState from "../interfaces/ProductState";
-import style from "../styles/home.module.css"
+
+
+import DrawerComponent from "../components/drawerComponent/DrawerComponent";
 
 interface Props {
   initialProducts: Product[];
@@ -25,18 +26,21 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
 
   return (
     <>
-      
+
       <Search setProductsState={setproductsState} />
 
       <Stack spacing={6}>
         <List products={stateProducts.filteredProducts} />
 
-        {cart.length > 0 && <Whatsasap />}
+
+        <DrawerComponent  />
       </Stack>
       <Animation />
     </>
   );
 };
+
+export default IndexRoute;
 
 export const getStaticProps: GetStaticProps = async () => {
   const initialProducts = await api.list();
@@ -50,4 +54,5 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default IndexRoute;
+
+

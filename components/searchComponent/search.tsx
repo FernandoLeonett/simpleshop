@@ -9,10 +9,11 @@ import {
   HStack,
   IconButton,
   Center,
+  Tooltip,
 } from "@chakra-ui/react";
 import { filter } from "../../utils/helper";
 import {FiRefreshCw} from "react-icons/fi";
-import { Search2Icon } from "@chakra-ui/icons";
+import { Search2Icon, SearchIcon } from "@chakra-ui/icons";
 import ProductState from "../../interfaces/ProductState";
 
 import { useShoping } from "../../context/context";
@@ -67,7 +68,11 @@ const search = ({ setProductsState }: Props) => {
         />
 
         <InputLeftElement>
-          <Search2Icon color={"#ccc"} />
+
+          <Tooltip hasArrow label='Search places' bg='gray.300' color='black'>
+            <SearchIcon />
+          </Tooltip>
+
         </InputLeftElement>
         <InputRightElement>
           <IconButton
@@ -79,9 +84,14 @@ const search = ({ setProductsState }: Props) => {
               boxShadow: " 0 0 3px rgba(255, 195, 0, 0.5 )"
             }}
           >
-            <Center>
+            {/* <Center>
               <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" />
-            </Center>
+            </Center> */}
+
+
+            <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" />
+
+
             {/* <img
               src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-refresh-arrows-dreamstale-lineal-dreamstale.png"
               width={"2rem"}
