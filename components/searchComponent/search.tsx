@@ -8,9 +8,10 @@ import {
   Icon,
   HStack,
   IconButton,
+  Center,
 } from "@chakra-ui/react";
 import { filter } from "../../utils/helper";
-
+import {FiRefreshCw} from "react-icons/fi";
 import { Search2Icon } from "@chakra-ui/icons";
 import ProductState from "../../interfaces/ProductState";
 
@@ -21,7 +22,6 @@ interface Props {
 }
 
 const search = ({ setProductsState }: Props) => {
-
   const [search, setSearch] = useState("");
 
   const handlerResfresh = (e) => {
@@ -52,7 +52,7 @@ const search = ({ setProductsState }: Props) => {
 
 
   return (
-    <HStack>
+    <HStack mx={20} mb={5}>
       <InputGroup>
         <Input
           name="filteredProducts"
@@ -60,15 +60,35 @@ const search = ({ setProductsState }: Props) => {
           htmlSize={30}
           placeholder="buscar productos"
           onChange={handleChangeSearch}
+          _focus={{
+            borderColor: "primary.100",
+            boxShadow: " 0 0 3px rgba(255, 195, 0, 0.5 )",
+          }}
         />
 
         <InputLeftElement>
-          <Search2Icon />
+          <Search2Icon color={"#ccc"} />
         </InputLeftElement>
+        <InputRightElement>
+          <IconButton
+            onClick={handlerResfresh}
+            variant="unstyled"
+            aria-label={"Search database"}
+            isRound
+            _focus={{
+              boxShadow: " 0 0 3px rgba(255, 195, 0, 0.5 )"
+            }}
+          >
+            <Center>
+              <Icon as={FiRefreshCw} color={"#ccc"} fontSize="2xl" />
+            </Center>
+            {/* <img
+              src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-refresh-arrows-dreamstale-lineal-dreamstale.png"
+              width={"2rem"}
+            /> */}
+          </IconButton>
+        </InputRightElement>
       </InputGroup>
-      <IconButton onClick={handlerResfresh} variant="unstyled" aria-label={""}>
-        <img src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/32/000000/external-refresh-arrows-dreamstale-lineal-dreamstale.png" />
-      </IconButton>
     </HStack>
   );
 };
