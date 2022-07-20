@@ -34,7 +34,7 @@ const Whatsaap = (): JSX.Element => {
             textMessage(cart)
           )}`}
           width="fit-content"
-          aria-label={""}
+          aria-label={"link de whatssap  para confirmar la compra"}
         >
           <Icon as={FaWhatsapp}>
             Completar pedido ({getNumberOfItems(cart)} productos)
