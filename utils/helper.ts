@@ -30,7 +30,7 @@ export const textMessage = (cart: CartItem[]) => {
 
   return msg;
 };
-const subTotal = (idSearched: string, cart: CartItem[]) => {
+export const subTotal = (idSearched: string, cart: CartItem[]) :number=> {
   const item = cart.find((item) => item.product.id === idSearched);
   const subTotal = item.product.price * item.quantityUnits;
 
@@ -45,7 +45,7 @@ export const getNumberOfItems = (cart: CartItem[]) => {
   return total;
 };
 
-const totalPrice = (cart: CartItem[]) =>
+export const totalPrice = (cart: CartItem[]) =>
   cart.reduce((sum, item) => sum + subTotal(item.product.id, cart), 0);
 
 export const filter = (text: string, products: Product[]) => {

@@ -8,10 +8,10 @@ import {BsShopWindow} from "react-icons/bs";
 import DrawerComponent from "../drawerComponent/DrawerComponent"
 // Drawer
 import { useDisclosure } from "@chakra-ui/react";
+import { useShoping } from "../../context/context";
 
 const Header = (): JSX.Element => {
-const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { onOpen } = useShoping();
   return (
     <Flex
       height={"6rem"}
@@ -38,9 +38,10 @@ const { isOpen, onOpen, onClose } = useDisclosure();
           // mr={30}
           w={9}
           color={"whiteAlpha.900"}
+          cursor={"pointer"}
           onClick={() => {onOpen()}}
         />
-        <DrawerComponent isOpen={isOpen} onClose={onClose}/>
+
         <Text
           alignSelf={"end"}
           color={"whiteAlpha.900"}
@@ -55,3 +56,5 @@ const { isOpen, onOpen, onClose } = useDisclosure();
 };
 
 export default Header;
+
+
