@@ -25,9 +25,6 @@ const Whatsaap = (): JSX.Element => {
 
     <Stack>
       <HStack>
-        <IconButton width="1.5" aria-label={""}>
-          <Image src={"./img/mercado-pago.svg"} />
-        </IconButton>
 
         <IconButton
           isExternal
@@ -43,12 +40,13 @@ const Whatsaap = (): JSX.Element => {
             Completar pedido ({getNumberOfItems(cart)} productos)
           </Icon>
         </IconButton>
+        <IconButton width="1.5" aria-label={""}>
+          <Image src={"./img/mercado-pago.svg"} />
+        </IconButton>
+
+
       </HStack>
-      <HStack>
-        <Box>
-          <Text>{getNumberOfItems(cart)} articulos</Text>
-        </Box>
-      </HStack>
+
     </Stack>
   );
 };
