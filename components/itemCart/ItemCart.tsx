@@ -60,12 +60,16 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
     <>
       <HStack justify={"space-around"} py={"0.5rem"}>
         <Box>
-          <Image boxSize={"5rem"} src={itemCart.product.image} />
+          <Image
+            maxHeight={["50", "100"]}
+            boxSize={"5rem"}
+            src={itemCart.product.image}
+          />
           <Flex justifyContent={"space-between"} mt={"0.5rem"}>
             <IconButton
               onClick={onMore}
               aria-label={""}
-              size={"sm"}
+              size={"xs"}
               _focus={{
                 border: "none",
                 color: "primary.500",
@@ -73,11 +77,11 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
             >
               <AddIcon fontSize={"sm"} />
             </IconButton>
-            <Text fontSize={"xl"}>{itemCart.quantityUnits}</Text>
+            <Text fontSize={["lg", "xl"]}>{itemCart.quantityUnits}</Text>
             <IconButton
               onClick={onMinus}
               aria-label={""}
-              size={"sm"}
+              size={"xs"}
               disabled={itemCart.quantityUnits === 1}
               _focus={{
                 border: "none",
