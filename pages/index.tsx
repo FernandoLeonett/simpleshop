@@ -29,28 +29,10 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
 
   return (
     <>
-
-
-      <Container
-        backgroundColor="white"
-        borderRadius="sm"
-        boxShadow="md"
-        maxWidth="container.lg"
-        padding={4}
-      ><Center>
-          <Heading as ={"h1"} >Ofertas con descuento</Heading>
-
-      </Center>
-
-
-        <Swiper products={initialProducts} />
-
-</Container>
-
       {/* <Heading textAlign={"center"} py={20}>
           Banner
         </Heading> */}
-      <Box p={4}>
+      <Box p={4} mt={["0.5rem"]}>
         <Container
           backgroundColor="white"
           borderRadius="sm"
@@ -58,12 +40,25 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
           maxWidth="container.lg"
           padding={4}
         >
-
           <Search setProductsState={setproductsState} />
           <List products={stateProducts.filteredProducts} />
-
         </Container>
       </Box>
+      <Container
+        backgroundColor="white"
+        borderRadius="sm"
+        boxShadow="md"
+        maxWidth="container.lg"
+        padding={4}
+        my={"2rem"}
+      >
+        <Center>
+          <Heading as={"h1"} p={"1rem"} color={"primary.500"}>
+            Nuestras Ofertas
+          </Heading>
+        </Center>
+        <Swiper products={initialProducts} />
+      </Container>
       <DrawerComponent />
       <Animation />
     </>

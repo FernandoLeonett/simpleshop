@@ -63,12 +63,14 @@ const Item = ({ product }: Props): JSX.Element => {
             cursor={"pointer"}
             layoutId={product.image}
             // minHeight={128}
-            // maxHeight={128}
+            maxHeight={128}
             objectFit="cover"
             src={product.image}
             onClick={() => setSelectedProduct(product)}
           />
-          <Text color="primary.900">{product.title}</Text>
+          <Text color="primary.900" noOfLines={1}>
+            {product.title}
+          </Text>
           <Text color="primary.500" fontSize="sm" fontWeight="500">
             {parseCurrency(product.price)}
           </Text>
@@ -80,14 +82,7 @@ const Item = ({ product }: Props): JSX.Element => {
           variant="outline"
           onClick={() => {
             handelarAddProduct(product);
-
           }}
-          _visited={
-            {
-              // background: "primary.50",
-              // boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
-            }
-          }
         >
           Agregar
         </Button>

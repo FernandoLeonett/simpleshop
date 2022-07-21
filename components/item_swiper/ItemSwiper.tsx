@@ -45,12 +45,8 @@ const Item = ({ product }: Props): JSX.Element => {
         <MyImage
           alt={product.title}
           borderTopRadius="md"
-
-          cursor={"pointer"}
-          // maxWidth={100}
-          // maxheight={100}
-
-          // minHeight={128}
+          // cursor={"pointer"}
+          maxHeight={128}
           width ={128}
           height={128}
           objectFit="cover"
@@ -64,7 +60,7 @@ const Item = ({ product }: Props): JSX.Element => {
 
 
           />
-        <Text color="primary.900">{product.title}</Text>
+        <Text color="primary.900" noOfLines={1}>{product.title}</Text>
         <Text color="primary.500" fontSize="sm" fontWeight="500">
           {parseCurrency(product.price)}
         </Text>

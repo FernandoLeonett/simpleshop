@@ -15,6 +15,7 @@ import {
   Stack,
   Divider,
   Flex,
+  Center,
 } from "@chakra-ui/react";
 import CartItem from "../itemCart/ItemCart"
 import useCart from "../../hooks/useCart";
@@ -42,27 +43,25 @@ const DrawerComponent = () => {
             }}
           />
           <Text color={"primary.500"}>Tu compra</Text>
-          <Text fontWeight={"thin"}>{getNumberOfItems(cart)} articulos</Text>
+          <Text fontWeight={"thin"} color={"primary.500"}>
+            {getNumberOfItems(cart)} articulo/s
+          </Text>
         </DrawerHeader>
         <DrawerBody>
           {cart.map((item, i) => (
             <>
               <CartItem key={item.product.id} itemCart={item} />
-
             </>
           ))}
         </DrawerBody>
         <DrawerFooter borderTopWidth="1px">
-          <Flex
-            width={"100%"}
-            justifyContent={"space-between"}
-          >
-            <Box fontWeight={"bold"}>
+          <Flex width={"100%"} justifyContent={"space-around"}>
+            <Box fontWeight={"bold"} fontSize={"1.1rem"} color={"primary.500"}>
               <Text>Total: </Text>
               <Text> Pagar con: </Text>
             </Box>
             <Box>
-              {parseCurrency(totalPrice(cart))}
+              <Text fontSize={"1.3rem"}>{parseCurrency(totalPrice(cart))}</Text>
               <Whatsasap />
             </Box>
           </Flex>

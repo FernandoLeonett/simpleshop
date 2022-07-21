@@ -21,7 +21,6 @@ const ItemSlider = ({ products }) => {
         disableOnInteraction: true,
       }}
       freeMode={true}
-
       modules={[Autoplay, FreeMode]}
       breakpoints={{
         0: {
@@ -44,8 +43,7 @@ const ItemSlider = ({ products }) => {
       className="mySwiper"
     >
       {slider.map((product, i) => (
-        <SwiperSlide key={i}>
-
+        <SwiperSlide key={i} >
           <ItemSwiper product={product} />
         </SwiperSlide>
       ))}
