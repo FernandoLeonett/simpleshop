@@ -2,7 +2,7 @@ import {Grid} from "@chakra-ui/react";
 import {motion} from "framer-motion";
 
 import Product from "../../interfaces/Product";
-import Item from "../item/item";
+import Item from "../item/Item";
 
 interface ProductsList {
   products: Product[];
@@ -30,3 +30,5 @@ const List = ({ products }: ProductsList): JSX.Element => (
 );
 
 export default List;
+
+

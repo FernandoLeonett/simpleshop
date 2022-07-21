@@ -1,5 +1,5 @@
 import {Stack, Text, Button, chakra} from "@chakra-ui/react";
-import {jsx} from "@emotion/react";
+
 import {motion} from "framer-motion";
 import Image from "next/image";
 import React from "react";
@@ -43,7 +43,7 @@ const Item = ({product}: Props): JSX.Element => {
             cursor={"pointer"}
             layoutId={product.image}
             // minHeight={128}
-            maxHeight={128}
+            // maxHeight={128}
             objectFit="cover"
             src={product.image}
             onClick={() => setSelectedProduct(product)}
@@ -66,8 +66,8 @@ const Item = ({product}: Props): JSX.Element => {
 
           }}
           _visited={{
-            background: "primary.50",
-            boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
+            // background: "primary.50",
+            // boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
 }}
         >
           Agregar

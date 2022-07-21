@@ -1,17 +1,18 @@
-import { Stack } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { useState } from "react";
 
 import List from "../components/List/List";
-import Search from "../components/searchComponent/search";
+import Search from "../components/searchComponent/Search";
 import Animation from "../components/animation/Animation";
-import useCart from "../hooks/useCart";
 import api from "../services/api";
 import Product from "../interfaces/Product";
 import ProductState from "../interfaces/ProductState";
-
-
 import DrawerComponent from "../components/drawerComponent/DrawerComponent";
+import Swiper from "../components/Swiper/Swiper";
+import{Heading, Center} from "@chakra-ui/react"
+import style from "../styles/home.module.css"
+
 
 interface Props {
   initialProducts: Product[];
@@ -22,19 +23,44 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
     products: initialProducts,
     filteredProducts: initialProducts,
   });
-  const { cart } = useCart();
-
   return (
     <>
 
-      <Search setProductsState={setproductsState} />
 
-      <Stack spacing={6}>
-        <List products={stateProducts.filteredProducts} />
+      <Container
+        backgroundColor="white"
+        borderRadius="sm"
+        boxShadow="md"
+        maxWidth="container.lg"
+        padding={4}
+      ><Center>
+          <Heading as ={"h1"} className={style.title}>Ofertas con descuento</Heading>
+
+      </Center>
 
 
-        <DrawerComponent  />
-      </Stack>
+        <Swiper products={initialProducts} />
+
+</Container>
+
+      {/* <Heading textAlign={"center"} py={20}>
+          Banner
+        </Heading> */}
+      <Box p={4}>
+        <Container
+          backgroundColor="white"
+          borderRadius="sm"
+          boxShadow="md"
+          maxWidth="container.lg"
+          padding={4}
+        >
+
+          <Search setProductsState={setproductsState} />
+          <List products={stateProducts.filteredProducts} />
+
+        </Container>
+      </Box>
+      <DrawerComponent />
       <Animation />
     </>
   );

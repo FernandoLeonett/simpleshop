@@ -3,7 +3,7 @@ import {ChakraProvider} from "@chakra-ui/react";
 import {AppProps} from "next/app";
 
 import {ShoppingProvider} from "../context/context";
-import LandingLayout from "../components/layouts/LandingLayout";
+import LandingLayout from "../components/layouts/layout";
 import theme from "../theme";
 const App = ({Component, pageProps}: AppProps): JSX.Element => {
   return (

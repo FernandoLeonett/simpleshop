@@ -1,4 +1,4 @@
-import {Flex, chakra} from "@chakra-ui/react";
+import {Flex, chakra, Box, Text} from "@chakra-ui/react";
 import {motion, AnimatePresence} from "framer-motion";
 import Image from "next/image";
 
@@ -32,6 +32,7 @@ const Animation = (): JSX.Element => {
             position="fixed"
             top={0}
             width="100%"
+            zIndex={5}
             onClick={() => setSelectedProduct(null)}
           >
             <motion.figure>
@@ -43,7 +44,9 @@ const Animation = (): JSX.Element => {
                 objectFit="cover"
                 src={selectedProduct.image}
               />
-              <motion.figcaption>{selectedProduct.description}</motion.figcaption>
+              <motion.figcaption>
+                <Text textAlign={"justify"} px={["1rem", "0rem"]}>{selectedProduct.description}</Text>
+              </motion.figcaption>
             </motion.figure>
           </Flex>
         </>
