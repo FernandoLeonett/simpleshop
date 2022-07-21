@@ -2355,7 +2355,7 @@
   "resolved" "https://registry.npmjs.org/prettier/-/prettier-2.7.1.tgz"
   "version" "2.7.1"
 
-"prop-types@^15.6.2", "prop-types@^15.8.1":
+"prop-types@^15.6.2", "prop-types@^15.7.2", "prop-types@^15.8.1":
   "integrity" "sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
   "version" "15.8.1"
@@ -2443,6 +2443,13 @@
     "get-nonce" "^1.0.0"
     "invariant" "^2.2.4"
     "tslib" "^2.0.0"
+
+"react-universal-flash@^1.0.18":
+  "integrity" "sha512-SFMcx4YqxKO1He2zIJrFL+fAjF9IpX/m+pjLb4VHWyG8TWjph66tvKhvJCS0Xvv1x18Md4N80Y0IK2HcdxBBqg=="
+  "resolved" "https://registry.npmjs.org/react-universal-flash/-/react-universal-flash-1.0.18.tgz"
+  "version" "1.0.18"
+  dependencies:
+    "prop-types" "^15.7.2"
 
 "react@^18.2.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="

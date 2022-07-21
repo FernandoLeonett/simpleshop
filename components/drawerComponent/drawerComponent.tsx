@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Drawer,
   DrawerBody,
@@ -19,6 +21,7 @@ import useCart from "../../hooks/useCart";
 import { getNumberOfItems, parseCurrency, totalPrice } from "../../utils/helper"
 import { useShoping } from "../../context/context";
 import Whatsasap from "../../components/whatsapp/Whatsaap"
+
 
 const DrawerComponent = () => {
 
@@ -42,10 +45,10 @@ const DrawerComponent = () => {
           <Text fontWeight={"thin"}>{getNumberOfItems(cart)} articulos</Text>
         </DrawerHeader>
         <DrawerBody>
-          {cart.map((item) => (
+          {cart.map((item, i) => (
             <>
               <CartItem key={item.product.id} itemCart={item} />
-              <Divider />
+
             </>
           ))}
         </DrawerBody>
@@ -70,4 +73,4 @@ const DrawerComponent = () => {
 }
 
 
-export default DrawerComponent;
+export default React.memo(DrawerComponent);

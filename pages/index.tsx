@@ -1,6 +1,6 @@
 import { Box, Container } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import List from "../components/List/List";
 import Search from "../components/searchComponent/Search";
@@ -11,7 +11,7 @@ import ProductState from "../interfaces/ProductState";
 import DrawerComponent from "../components/drawerComponent/DrawerComponent";
 import Swiper from "../components/Swiper/Swiper";
 import{Heading, Center} from "@chakra-ui/react"
-import style from "../styles/home.module.css"
+
 
 
 interface Props {
@@ -23,6 +23,10 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
     products: initialProducts,
     filteredProducts: initialProducts,
   });
+
+
+
+
   return (
     <>
 
@@ -34,7 +38,7 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
         maxWidth="container.lg"
         padding={4}
       ><Center>
-          <Heading as ={"h1"} className={style.title}>Ofertas con descuento</Heading>
+          <Heading as ={"h1"} >Ofertas con descuento</Heading>
 
       </Center>
 

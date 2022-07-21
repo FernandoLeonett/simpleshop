@@ -1,3 +1,5 @@
+
+import React from "react";
 import {
   HStack,
   Stack,
@@ -19,12 +21,15 @@ import {
   TableContainer,
   Center,
   Button,
+  Divider,
   IconButton,
 } from "@chakra-ui/react";
+
 import CartItem from "../../interfaces/CartItem";
 import { parseCurrency, subTotal } from "../../utils/helper";
 import { AddIcon, MinusIcon, DeleteIcon } from "@chakra-ui/icons";
 import useCart from "../../hooks/useCart";
+
 interface Prop {
   itemCart: CartItem;
 }
@@ -36,7 +41,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
     const updateItem = {...itemCart}
     updateItem.quantityUnits= updateItem.quantityUnits-1
 
-    setCart((prev=> [...prev.filter(c=>c.product.id!=updateItem.product.id),updateItem]))
+    setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
 
 
   }
@@ -45,7 +50,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
     const updateItem = { ...itemCart }
     updateItem.quantityUnits = updateItem.quantityUnits + 1
 
-    setCart((prev => [...prev.filter(c => c.product.id != updateItem.product.id), updateItem]))
+    setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
 
 
   }
@@ -113,6 +118,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
               </Tfoot>
             </Table>
           </TableContainer>
+          <Divider />
         </Box>
         {/* <Box>
             <Text color="primary.900"> {itemCart.product.title}</Text>
@@ -140,4 +146,4 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
   );
 };
 
-export default ItemCart;
+export default ItemCart

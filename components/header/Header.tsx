@@ -9,9 +9,12 @@ import DrawerComponent from "../drawerComponent/DrawerComponent"
 // Drawer
 import { useDisclosure } from "@chakra-ui/react";
 import { useShoping } from "../../context/context";
+import useCart from "../../hooks/useCart";
+import { getNumberOfItems } from "../../utils/helper";
 
 const Header = (): JSX.Element => {
   const { onOpen } = useShoping();
+  const {cart}= useCart()
   return (
     <Flex
       height={"6rem"}
@@ -48,7 +51,8 @@ const Header = (): JSX.Element => {
           fontWeight={"bold"}
           fontSize={"md"}
         >
-          0
+          {getNumberOfItems(cart)}
+
         </Text>
       </Flex>
     </Flex>

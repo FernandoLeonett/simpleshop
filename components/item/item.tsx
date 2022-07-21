@@ -1,30 +1,50 @@
-import {Stack, Text, Button, chakra} from "@chakra-ui/react";
+import {
+  Stack,
+  Text,
+  Button,
+  chakra,
+  useToast,
+  Box,
+  HStack,
+  CloseButton,
+} from "@chakra-ui/react";
 
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import React from "react";
 
-import {useShoping} from "../../context/context";
+import { useShoping } from "../../context/context";
 import useCart from "../../hooks/useCart";
 import Product from "../../interfaces/Product";
-import {parseCurrency} from "../../utils/helper";
+import { parseCurrency } from "../../utils/helper";
+
+
 interface Props {
   product: Product;
 }
 
-const Item = ({product}: Props): JSX.Element => {
-  const {addItem} = useCart();
-  const {setSelectedProduct} = useShoping();
+const Item = ({ product }: Props): JSX.Element => {
+  const toast = useToast();
+  const { addItem } = useCart();
+  const { setSelectedProduct } = useShoping();
   const itemEffect = {
-    hidden: {opacity: 0, scale: 0},
-    show: {opacity: 1, scale: 1},
+    hidden: { opacity: 0, scale: 0 },
+    show: { opacity: 1, scale: 1 },
   };
   const handelarAddProduct = (product: Product) => {
     addItem(product);
+    toast({
+      title: `Agregado ${product.title}`,
+      status: "success",
+      isClosable: true,
+      position: "top",
+
+    })
   };
 
   const MyImage = chakra(Image, {
-    shouldForwardProp: (prop) => ["width", "height", "src", "alt", "onClick"].includes(prop),
+    shouldForwardProp: (prop) =>
+      ["width", "height", "src", "alt", "onClick"].includes(prop),
   });
 
   return (
@@ -58,17 +78,16 @@ const Item = ({product}: Props): JSX.Element => {
           colorScheme="primary"
           size="sm"
           variant="outline"
-          onClick={() => handelarAddProduct(product)}
-          _focus={{
-            border: "none",
-            background: "primary.50",
-            boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
+          onClick={() => {
+            handelarAddProduct(product);
 
           }}
-          _visited={{
-            // background: "primary.50",
-            // boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
-}}
+          _visited={
+            {
+              // background: "primary.50",
+              // boxShadow: " 0 0 5px rgba(255, 195, 0, 0.5 )",
+            }
+          }
         >
           Agregar
         </Button>

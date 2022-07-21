@@ -1,4 +1,4 @@
-import { Stack, Text, chakra } from "@chakra-ui/react";
+import { Stack, Text, chakra, useToast } from "@chakra-ui/react";
 
 import React from "react";
 
@@ -13,11 +13,20 @@ interface Props {
 
 const Item = ({ product }: Props): JSX.Element => {
   const { addItem } = useCart();
+  const toast = useToast()
 
 
 
   const handelarAddProduct = (product: Product) => {
     addItem(product);
+
+    toast({
+      title: `Agregado ${product.title}`,
+      status: "success",
+      isClosable: true,
+      position: "top",
+
+    })
   };
 
   const MyImage = chakra(Image, {
@@ -47,7 +56,11 @@ const Item = ({ product }: Props): JSX.Element => {
           objectFit="cover"
           src={product.image}
 
-           onClick={() => handelarAddProduct(product)}
+           onClick={() => {handelarAddProduct(product)
+
+
+
+          }}
 
 
           />
