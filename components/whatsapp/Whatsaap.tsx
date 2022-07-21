@@ -23,31 +23,26 @@ const Whatsaap = (): JSX.Element => {
   return (
     // <Flex alignItems="center" bottom={4} justifyContent="center" position="sticky">
 
-    <Stack>
-      <HStack>
+    <HStack>
+      <IconButton
+        isExternal
+        as={Link}
+        colorScheme="whatsapp"
+        href={`https://wa.me/${whatshapNumber}?text=${encodeURIComponent(
+          textMessage(cart)
+        )}`}
+        // width="fit-content"
 
-        <IconButton
-          isExternal
-          as={Link}
-          colorScheme="whatsapp"
-          href={`https://wa.me/${whatshapNumber}?text=${encodeURIComponent(
-            textMessage(cart)
-          )}`}
-          width="fit-content"
-          aria-label={"link de whatssap  para confirmar la compra"}
-        >
-          <Icon as={FaWhatsapp}>
-            Completar pedido ({getNumberOfItems(cart)} productos)
-          </Icon>
-        </IconButton>
-        <IconButton width="1.5" aria-label={""}>
-          <Image src={"./img/mercado-pago.svg"} />
-        </IconButton>
-
-
-      </HStack>
-
-    </Stack>
+        aria-label={"link de whatssap  para confirmar la compra"}
+      >
+        <Icon as={FaWhatsapp} boxSize={"2rem"}>
+          Completar pedido ({getNumberOfItems(cart)} productos)
+        </Icon>
+      </IconButton>
+      <IconButton as={Link} width="1.5" aria-label={""}>
+        <Image src={"./img/mercado-pago.svg"} />
+      </IconButton>
+    </HStack>
   );
 };
 

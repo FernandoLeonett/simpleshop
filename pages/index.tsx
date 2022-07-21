@@ -11,6 +11,7 @@ import ProductState from "../interfaces/ProductState";
 import DrawerComponent from "../components/drawerComponent/DrawerComponent";
 import Swiper from "../components/Swiper/Swiper";
 import{Heading, Center} from "@chakra-ui/react"
+import style from  "../styles/home.module.css"
 
 
 
@@ -23,34 +24,44 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
     products: initialProducts,
     filteredProducts: initialProducts,
   });
+  const [slider, setSlider] = useState(false)
+useEffect(() => {
+
+setTimeout(() => {
+  setSlider(true)
+
+}, 5000);
+  return () => {
+    clearTimeout()
+  }
+}, [])
 
 
 
 
   return (
     <>
+     { slider &&
 
+        <Container
+          backgroundColor="white"
+          borderRadius="sm"
+          boxShadow="md"
+          maxWidth="container.lg"
+          padding={4}
+          my={"2rem"}
+        >
+          <Center >
+            <Heading as={"h1"} p={"1rem"} color={"primary.500"}>
+              Nuestras Ofertas
+            </Heading>
+          </Center>
+          <Swiper products={initialProducts} />
 
-      <Container
-        backgroundColor="white"
-        borderRadius="sm"
-        boxShadow="md"
-        maxWidth="container.lg"
-        padding={4}
-      ><Center>
-          <Heading as ={"h1"} >Ofertas con descuento</Heading>
+        </Container>
 
-      </Center>
-
-
-        <Swiper products={initialProducts} />
-
-</Container>
-
-      {/* <Heading textAlign={"center"} py={20}>
-          Banner
-        </Heading> */}
-      <Box p={4}>
+     }
+      <Box p={4} mt={["0.5rem"]}>
         <Container
           backgroundColor="white"
           borderRadius="sm"
@@ -58,12 +69,11 @@ const IndexRoute = ({ initialProducts }: Props): JSX.Element => {
           maxWidth="container.lg"
           padding={4}
         >
-
           <Search setProductsState={setproductsState} />
           <List products={stateProducts.filteredProducts} />
-
         </Container>
       </Box>
+
       <DrawerComponent />
       <Animation />
     </>

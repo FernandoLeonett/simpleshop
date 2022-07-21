@@ -3,7 +3,7 @@ import {Grid} from "@chakra-ui/react";
 import {motion} from "framer-motion";
 
 import Product from "../../interfaces/Product";
-import Item from "../item/Item";
+import Item from "../item/Item"
 
 interface ProductsList {
   products: Product[];

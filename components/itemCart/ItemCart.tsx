@@ -35,9 +35,10 @@ interface Prop {
 }
 
 const ItemCart = ({ itemCart }: Prop): JSX.Element => {
-  const { cart, addItem, removeItem , setCart} = useCart();
+  const { updateItem,  removeItem } = useCart();
 
   const onMinus=()=>{
+    updateItem(itemCart,-1)
     // const updateItem = {...itemCart}
     // updateItem.quantityUnits= updateItem.quantityUnits-1
 
@@ -46,32 +47,23 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
 
   }
 
-  const onMore = (q, item) => {
-    // addItem(itemCart.product)
-    const updateItem = { ...item }
-    updateItem.quantityUnits = updateItem.quantityUnits + q
-
-    setCart((prev => [...prev.filter(c => c.product.id !== item.product.id), updateItem]))
+  const onMore = () => {
+     updateItem(itemCart, 1)
 
 
   }
 
 
   return (
-    <Stack>
+    <>
       <HStack justify={"space-around"} py={"0.5rem"}>
         <Box>
-          <Image
-            borderRadius="full"
-            boxSize="5rem"
-            // mr={30}
-            src={itemCart.product.image}
-          />
-          <Flex justifyContent={"space-around"} mt={"0.5rem"}>
+          <Image boxSize={"5rem"} src={itemCart.product.image} />
+          <Flex justifyContent={"space-between"} mt={"0.5rem"}>
             <IconButton
-              onClick={() => onMore(-1, itemCart)}
+              onClick={() => onMore()}
               aria-label={""}
-              size={"xs"}
+              size={"sm"}
               _focus={{
                 border: "none",
                 color: "primary.500",
@@ -79,11 +71,11 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
             >
               <AddIcon fontSize={"sm"} />
             </IconButton>
-            <Text fontSize={"lg"}>{itemCart.quantityUnits}</Text>
+            <Text fontSize={"xl"}>{itemCart.quantityUnits}</Text>
             <IconButton
-              onClick={() =>onMore(1, itemCart)}
+              onClick={() =>onMinus()}
               aria-label={""}
-              size={"xs"}
+              size={"sm"}
               disabled={itemCart.quantityUnits === 1}
               _focus={{
                 border: "none",
@@ -96,7 +88,9 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
         </Box>
         <Box>
           <Center>
-            <Text color={"primary.900"}>{itemCart.product.title}</Text>
+            <Text color={"primary.900"} noOfLines={1}>
+              {itemCart.product.title}
+            </Text>
           </Center>
           <TableContainer>
             <Table variant="unstyled" size={"sm"}>
@@ -119,7 +113,6 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
               </Tfoot>
             </Table>
           </TableContainer>
-          <Divider />
         </Box>
         {/* <Box>
             <Text color="primary.900"> {itemCart.product.title}</Text>
@@ -132,18 +125,20 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
             <Text>subtotal: {subTotal(itemCart.product.id, cart)}</Text>
           </Box> */}
         <IconButton
-        aria-label=""
+          size={["xs", "md"]}
+          aria-label=""
           onClick={() => removeItem(itemCart.product.id)}
           _focus={{
             border: "none",
-            color:"primary.500",
+            color: "primary.500",
           }}
         >
           <DeleteIcon alignSelf={"center"} fontSize={"lg"} />
         </IconButton>
       </HStack>
+      <Divider />
       {/* divider = {<StackDivider borderColor="gray.200" />} */}
-    </Stack>
+    </>
   );
 };
 
