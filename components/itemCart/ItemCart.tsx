@@ -28,6 +28,7 @@ import {
 import CartItem from "../../interfaces/CartItem";
 import { parseCurrency, subTotal } from "../../utils/helper";
 import { AddIcon, MinusIcon, DeleteIcon } from "@chakra-ui/icons";
+import { useMediaQuery } from "@chakra-ui/react";
 import useCart from "../../hooks/useCart";
 
 interface Prop {
@@ -35,6 +36,7 @@ interface Prop {
 }
 
 const ItemCart = ({ itemCart }: Prop): JSX.Element => {
+  const [isSmallerThan385] = useMediaQuery("(max-width: 385px)")
   const { updateItem,  removeItem } = useCart();
 
   const onMinus=()=>{
@@ -59,8 +61,9 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
       <HStack justify={"space-around"} py={"0.5rem"}>
         <Box>
           <Image
-            maxHeight={["50", "100"]}
+          borderRadius={"sm"}
             boxSize={"5rem"}
+            maxHeight={isSmallerThan385 ? "50" : "100"}
             src={itemCart.product.image}
           />
           <Flex justifyContent={"space-between"} mt={"0.5rem"}>
@@ -75,9 +78,9 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
             >
               <AddIcon fontSize={"sm"} />
             </IconButton>
-            <Text fontSize={["lg", "xl"]}>{itemCart.quantityUnits}</Text>
+            <Text fontSize={"lg"}>{itemCart.quantityUnits}</Text>
             <IconButton
-              onClick={() =>onMinus()}
+              onClick={() => onMinus()}
               aria-label={""}
               size={"xs"}
               disabled={itemCart.quantityUnits === 1}
@@ -112,7 +115,12 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
               <Tfoot>
                 <Tr>
                   <Th>Subtotal</Th>
-                  <Th>${parseCurrency(itemCart.product.price*itemCart.quantityUnits)}</Th>
+                  <Th>
+                    $
+                    {parseCurrency(
+                      itemCart.product.price * itemCart.quantityUnits
+                    )}
+                  </Th>
                 </Tr>
               </Tfoot>
             </Table>
