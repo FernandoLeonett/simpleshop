@@ -1,4 +1,5 @@
-import React from "react";
+
+
 
 import {
   Drawer,
@@ -25,6 +26,7 @@ import Whatsasap from "../../components/whatsapp/Whatsaap"
 
 const DrawerComponent = () => {
 
+
   const { isOpen, onClose } = useShoping()
   const { cart } = useCart()
 
@@ -47,7 +49,7 @@ const DrawerComponent = () => {
         <DrawerBody>
           {cart.map((item, i) => (
             <>
-              <CartItem key={item.product.id} itemCart={item} />
+              <CartItem key={i} itemCart={item} />
 
             </>
           ))}
@@ -73,4 +75,4 @@ const DrawerComponent = () => {
 }
 
 
-export default React.memo(DrawerComponent);
+export default DrawerComponent

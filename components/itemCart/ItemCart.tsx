@@ -35,22 +35,23 @@ interface Prop {
 }
 
 const ItemCart = ({ itemCart }: Prop): JSX.Element => {
-  const { cart, setCart, removeItem } = useCart();
+  const { cart, addItem, removeItem , setCart} = useCart();
 
   const onMinus=()=>{
-    const updateItem = {...itemCart}
-    updateItem.quantityUnits= updateItem.quantityUnits-1
+    // const updateItem = {...itemCart}
+    // updateItem.quantityUnits= updateItem.quantityUnits-1
 
-    setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
+    // setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
 
 
   }
 
-  const onMore = () => {
-    const updateItem = { ...itemCart }
-    updateItem.quantityUnits = updateItem.quantityUnits + 1
+  const onMore = (q, item) => {
+    // addItem(itemCart.product)
+    const updateItem = { ...item }
+    updateItem.quantityUnits = updateItem.quantityUnits + q
 
-    setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
+    setCart((prev => [...prev.filter(c => c.product.id !== item.product.id), updateItem]))
 
 
   }
@@ -68,7 +69,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
           />
           <Flex justifyContent={"space-around"} mt={"0.5rem"}>
             <IconButton
-              onClick={onMore}
+              onClick={() => onMore(-1, itemCart)}
               aria-label={""}
               size={"xs"}
               _focus={{
@@ -80,7 +81,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
             </IconButton>
             <Text fontSize={"lg"}>{itemCart.quantityUnits}</Text>
             <IconButton
-              onClick={onMinus}
+              onClick={() =>onMore(1, itemCart)}
               aria-label={""}
               size={"xs"}
               disabled={itemCart.quantityUnits === 1}
@@ -113,7 +114,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
               <Tfoot>
                 <Tr>
                   <Th>Subtotal</Th>
-                  <Th>${subTotal(itemCart.product.id, cart)}</Th>
+                  <Th>${parseCurrency(itemCart.product.price*itemCart.quantityUnits)}</Th>
                 </Tr>
               </Tfoot>
             </Table>

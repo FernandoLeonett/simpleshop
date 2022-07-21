@@ -24,6 +24,8 @@ interface Props {
 }
 
 const Item = ({ product }: Props): JSX.Element => {
+
+
   const toast = useToast();
   const { addItem } = useCart();
   const { setSelectedProduct } = useShoping();
