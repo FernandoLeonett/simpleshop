@@ -1,4 +1,5 @@
-import React from "react";
+
+
 
 import {
   Drawer,
@@ -21,10 +22,11 @@ import CartItem from "../itemCart/ItemCart"
 import useCart from "../../hooks/useCart";
 import { getNumberOfItems, parseCurrency, totalPrice } from "../../utils/helper"
 import { useShoping } from "../../context/context";
-import Whatsasap from "../../components/whatsapp/Whatsaap"
+import Whatsasap from "../whatsapp/Whatsaap"
 
 
 const DrawerComponent = () => {
+
 
   const { isOpen, onClose } = useShoping()
   const { cart } = useCart()
@@ -48,10 +50,10 @@ const DrawerComponent = () => {
           </Text>
         </DrawerHeader>
         <DrawerBody>
-          {cart.map((item, i) => (
-            <>
+          {cart.map((item ) => (
+
               <CartItem key={item.product.id} itemCart={item} />
-            </>
+
           ))}
         </DrawerBody>
         <DrawerFooter borderTopWidth="1px">
@@ -72,4 +74,4 @@ const DrawerComponent = () => {
 }
 
 
-export default React.memo(DrawerComponent);
+export default DrawerComponent

@@ -11,18 +11,51 @@ const useCart = () => {
     };
 
     if (cart.length == 0) {
-      setCart((prev) => [...prev, newItem]);
+      setCart([...cart, newItem]);
     } else {
       const found = cart.find((i) => i.product.id === product.id);
 
       if (found) {
-        newItem.quantityUnits = found.quantityUnits + 1;
-        setCart((prev) => [...prev.filter((e) => e.product.id !== product.id), newItem]);
+
+
+        updateItem(found,1)
+        // setCart((prev) => [...prev.filter((e) => e.product.id !== product.id), newItem]);
       } else {
-        setCart((prev) => [...prev, newItem]);
+        setCart([...cart, newItem]);
       }
     }
   }
+
+  const updateItem =(item:CartItem, cant)=>{
+    const copy = { ...item };
+
+    copy.quantityUnits = copy.quantityUnits + cant;
+    setCart([...cart.filter((e) => e.product.id !== copy.product.id), copy]);
+  }
+
+
+    // function minusItem(product: Product) {
+    //   const newItem: CartItem = {
+    //     product,
+    //     quantityUnits: 1,
+    //   };
+
+    //   if (cart.length == 0) {
+    //     setCart((prev) => [...prev, newItem]);
+    //   } else {
+    //     const found = cart.find((i) => i.product.id === product.id);
+
+    //     if (found) {
+    //       newItem.quantityUnits = found.quantityUnits + 1;
+    //       setCart((prev) => [
+    //         ...prev.filter((e) => e.product.id !== product.id),
+    //         newItem,
+    //       ]);
+    //     } else {
+    //       setCart((prev) => [...prev, newItem]);
+    //     }
+    //   }
+    // }
 
   const removeItem = (deleteId: string) => {
     const newList = cart.filter(({product}) => product.id !== deleteId);
@@ -44,6 +77,7 @@ const useCart = () => {
     addItem,
     clearCart,
     removeItem,
+    updateItem,
   };
 };
 

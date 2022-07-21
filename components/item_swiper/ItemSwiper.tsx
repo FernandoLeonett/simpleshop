@@ -52,11 +52,7 @@ const Item = ({ product }: Props): JSX.Element => {
           objectFit="cover"
           src={product.image}
 
-           onClick={() => {handelarAddProduct(product)
 
-
-
-          }}
 
 
           />

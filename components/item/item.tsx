@@ -24,6 +24,8 @@ interface Props {
 }
 
 const Item = ({ product }: Props): JSX.Element => {
+
+
   const toast = useToast();
   const { addItem } = useCart();
   const { setSelectedProduct } = useShoping();
@@ -48,7 +50,7 @@ const Item = ({ product }: Props): JSX.Element => {
   });
 
   return (
-    <motion.li key={product.id} variants={itemEffect}>
+    <motion.li variants={itemEffect}>
       <Stack
         backgroundColor="orange.100"
         borderRadius="md"

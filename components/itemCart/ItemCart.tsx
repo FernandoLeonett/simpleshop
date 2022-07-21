@@ -35,22 +35,20 @@ interface Prop {
 }
 
 const ItemCart = ({ itemCart }: Prop): JSX.Element => {
-  const { cart, setCart, removeItem } = useCart();
+  const { updateItem,  removeItem } = useCart();
 
   const onMinus=()=>{
-    const updateItem = {...itemCart}
-    updateItem.quantityUnits= updateItem.quantityUnits-1
+    updateItem(itemCart,-1)
+    // const updateItem = {...itemCart}
+    // updateItem.quantityUnits= updateItem.quantityUnits-1
 
-    setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
+    // setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
 
 
   }
 
   const onMore = () => {
-    const updateItem = { ...itemCart }
-    updateItem.quantityUnits = updateItem.quantityUnits + 1
-
-    setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
+     updateItem(itemCart, 1)
 
 
   }
@@ -67,7 +65,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
           />
           <Flex justifyContent={"space-between"} mt={"0.5rem"}>
             <IconButton
-              onClick={onMore}
+              onClick={() => onMore()}
               aria-label={""}
               size={"xs"}
               _focus={{
@@ -79,7 +77,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
             </IconButton>
             <Text fontSize={["lg", "xl"]}>{itemCart.quantityUnits}</Text>
             <IconButton
-              onClick={onMinus}
+              onClick={() =>onMinus()}
               aria-label={""}
               size={"xs"}
               disabled={itemCart.quantityUnits === 1}
@@ -114,7 +112,7 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
               <Tfoot>
                 <Tr>
                   <Th>Subtotal</Th>
-                  <Th>${subTotal(itemCart.product.id, cart)}</Th>
+                  <Th>${parseCurrency(itemCart.product.price*itemCart.quantityUnits)}</Th>
                 </Tr>
               </Tfoot>
             </Table>
