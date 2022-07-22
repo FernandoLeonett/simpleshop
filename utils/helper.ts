@@ -1,5 +1,7 @@
-import CartItem from "../interfaces/CartItem";
+
 import Product from "../interfaces/Product";
+
+
 
 export const responseUrl = (url: string): string => {
   const urlBase = "http://drive.google.com/uc?export=view&id=";
@@ -16,37 +18,7 @@ export const parseCurrency = (value: number): string => {
   });
 };
 
-export const textMessage = (cart: CartItem[]) => {
-  let msg = "";
 
-  cart.forEach((item) => {
-    msg += `${item.product.title} -Precio Unitario:  ${parseCurrency(
-      item.product.price
-    )} -unidades: ${item.quantityUnits} subtotal: ${parseCurrency(
-      subTotal(item.product.id, cart)
-    )}\n`;
-  });
-  msg += `Monto a pagar: ${parseCurrency(totalPrice(cart))}`;
-
-  return msg;
-};
-export const subTotal = (idSearched: string, cart: CartItem[]) :number=> {
-  const item = cart.find((item) => item.product.id === idSearched);
-  const subTotal = item.product.price * item.quantityUnits;
-
-  return subTotal;
-};
-
-export const getNumberOfItems = (cart: CartItem[]) => {
-  const total = cart.reduce((acc, item) => {
-    return (acc += item.quantityUnits);
-  }, 0);
-
-  return total;
-};
-
- export const totalPrice = (cart: CartItem[]) =>
-  cart.reduce((sum, item) => sum + subTotal(item.product.id, cart), 0);
 
 export const filter = (text: string, products: Product[]) => {
   const filteredProducts = [];
@@ -71,7 +43,7 @@ export const filter = (text: string, products: Product[]) => {
 export const ignoreAccentAndCase = (pValue) => {
 
   const arr = [...pValue].map((ch) => repalceAccents(ch)).join().replaceAll(" ", "").replaceAll(",", "").toLocaleLowerCase();
-  console.log(arr)
+
   return arr;
 };
 

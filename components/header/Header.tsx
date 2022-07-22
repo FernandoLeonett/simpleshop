@@ -1,20 +1,16 @@
 import React from "react";
-import Image from "next/image";
-import {Button, Icon, IconButton, Text} from "@chakra-ui/react";
-import {Box, chakra, Flex, HStack, VStack} from "@chakra-ui/react";
-import {FaShoppingCart} from "react-icons/fa";
+import {Icon, Text} from "@chakra-ui/react";
+import {Flex} from "@chakra-ui/react";
 import {FiShoppingCart} from "react-icons/fi"
 import {BsShopWindow} from "react-icons/bs";
-import DrawerComponent from "../drawerComponent/DrawerComponent"
 // Drawer
-import { useDisclosure } from "@chakra-ui/react";
 import { useShoping } from "../../context/context";
 import useCart from "../../hooks/useCart";
-import { getNumberOfItems } from "../../utils/helper";
+
 
 const Header = (): JSX.Element => {
   const { onOpen } = useShoping();
-  const {cart}= useCart()
+  const { getNumberOfItems }= useCart()
   return (
     <Flex
       height={"6rem"}
@@ -51,7 +47,7 @@ const Header = (): JSX.Element => {
           fontWeight={"bold"}
           fontSize={"md"}
         >
-          {getNumberOfItems(cart)}
+          {getNumberOfItems()}
 
         </Text>
       </Flex>

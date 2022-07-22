@@ -19,6 +19,7 @@ import Product from "../../interfaces/Product";
 import { parseCurrency } from "../../utils/helper";
 
 
+
 interface Props {
   product: Product;
 }
@@ -35,6 +36,7 @@ const Item = ({ product }: Props): JSX.Element => {
   };
   const handelarAddProduct = (product: Product) => {
     addItem(product);
+
     toast({
       title: `Agregado ${product.title}`,
       status: "success",

@@ -1,32 +1,24 @@
-
 import React from "react";
 import {
   HStack,
-  Stack,
-  VStack,
   Image,
   Box,
-  StackDivider,
-  Heading,
   Text,
   Flex,
   Table,
-  Thead,
   Tbody,
   Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
   Center,
-  Button,
   Divider,
   IconButton,
 } from "@chakra-ui/react";
 
 import CartItem from "../../interfaces/CartItem";
-import { parseCurrency, subTotal } from "../../utils/helper";
+import { parseCurrency } from "../../utils/helper";
 import { AddIcon, MinusIcon, DeleteIcon } from "@chakra-ui/icons";
 import { useMediaQuery } from "@chakra-ui/react";
 import useCart from "../../hooks/useCart";
@@ -36,32 +28,24 @@ interface Prop {
 }
 
 const ItemCart = ({ itemCart }: Prop): JSX.Element => {
-  const [isSmallerThan385] = useMediaQuery("(max-width: 385px)")
-  const { updateItem,  removeItem } = useCart();
+  const [isSmallerThan385] = useMediaQuery("(max-width: 385px)");
+  const { updateCart, removeItem } = useCart();
 
-  const onMinus=()=>{
-    updateItem(itemCart,-1)
-    // const updateItem = {...itemCart}
-    // updateItem.quantityUnits= updateItem.quantityUnits-1
+  const onMinus = () => {
+    updateCart(itemCart.product, -1);
 
-    // setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
-
-
-  }
+  };
 
   const onMore = () => {
-     updateItem(itemCart, 1)
-
-
-  }
-
+    updateCart(itemCart.product, 1);
+  };
 
   return (
     <>
       <HStack justify={"space-around"} py={"0.5rem"}>
         <Box>
           <Image
-          borderRadius={"sm"}
+            borderRadius={"sm"}
             boxSize={"5rem"}
             maxHeight={isSmallerThan385 ? "50" : "100"}
             src={itemCart.product.image}
@@ -154,4 +138,4 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
   );
 };
 
-export default ItemCart
+export default ItemCart;

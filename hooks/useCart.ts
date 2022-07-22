@@ -1,10 +1,11 @@
-import {useShoping} from "../context/context";
+import { useShoping } from "../context/context";
 import CartItem from "../interfaces/CartItem";
 import Product from "../interfaces/Product";
+import { parseCurrency } from "../utils/helper";
 const useCart = () => {
-  const {cart, setCart} = useShoping();
+  const { cart, setCart } = useShoping();
 
-  function addItem(product: Product) {
+  const  addItem =(product: Product) =>{
     const newItem: CartItem = {
       product,
       quantityUnits: 1,
@@ -13,52 +14,34 @@ const useCart = () => {
     if (cart.length == 0) {
       setCart([...cart, newItem]);
     } else {
-      const found = cart.find((i) => i.product.id === product.id);
-
-      if (found) {
-
-
-        updateItem(found,1)
-        // setCart((prev) => [...prev.filter((e) => e.product.id !== product.id), newItem]);
-      } else {
-        setCart([...cart, newItem]);
-      }
+      updateCart(product, 1);
     }
   }
 
-  const updateItem =(item:CartItem, cant)=>{
-    const copy = { ...item };
-
-    copy.quantityUnits = copy.quantityUnits + cant;
-    setCart([...cart.filter((e) => e.product.id !== copy.product.id), copy]);
-  }
-
-
-    // function minusItem(product: Product) {
-    //   const newItem: CartItem = {
-    //     product,
-    //     quantityUnits: 1,
-    //   };
-
-    //   if (cart.length == 0) {
-    //     setCart((prev) => [...prev, newItem]);
-    //   } else {
-    //     const found = cart.find((i) => i.product.id === product.id);
-
-    //     if (found) {
-    //       newItem.quantityUnits = found.quantityUnits + 1;
-    //       setCart((prev) => [
-    //         ...prev.filter((e) => e.product.id !== product.id),
-    //         newItem,
-    //       ]);
-    //     } else {
-    //       setCart((prev) => [...prev, newItem]);
-    //     }
-    //   }
-    // }
+  const updateCart = (product: Product, q: number) => {
+    const found = cart.findIndex((f) => f.product.id === product.id);
+    const newItem: CartItem = {
+      product,
+      quantityUnits: 1,
+    };
+    if (found == -1) {
+      setCart((prev) => {
+        prev.push(newItem);
+        const newList = [...prev];
+        return newList;
+      });
+    } else {
+      newItem.quantityUnits = { ...cart[found] }.quantityUnits + q;
+      setCart((prev) => {
+        prev[found] = newItem;
+        const newList = [...prev];
+        return newList;
+      });
+    }
+  };
 
   const removeItem = (deleteId: string) => {
-    const newList = cart.filter(({product}) => product.id !== deleteId);
+    const newList = cart.filter(({ product }) => product.id !== deleteId);
 
     setCart((prev) => prev.filter(({ product }) => product.id !== deleteId));
     localStorage.removeItem("items");
@@ -71,13 +54,51 @@ const useCart = () => {
     localStorage.setItem("items", JSON.stringify([]));
   };
 
+  const getNumberOfItems = () => {
+    const total = cart.reduce((acc, item) => {
+      return (acc += item.quantityUnits);
+    }, 0);
+
+    return total;
+  };
+
+  const subTotal = (idSearched: string): number => {
+    const item = cart.find((item) => item.product.id === idSearched);
+    const subTotal = item.product.price * item.quantityUnits;
+
+    return subTotal;
+  };
+  const totalCost = cart.reduce(
+    (sum, item) => sum + subTotal(item.product.id),
+    0
+  );
+
+  const textMessage = () => {
+    let msg = "";
+
+    cart.forEach((item) => {
+      msg += `${item.product.title} -Precio Unitario:  ${parseCurrency(
+        item.product.price
+      )} -unidades: ${item.quantityUnits} subtotal: ${parseCurrency(
+        subTotal(item.product.id)
+      )}\n`;
+    });
+    msg += `Monto a pagar: ${parseCurrency(totalCost)}`;
+
+    return msg;
+  };
+
   return {
+    getNumberOfItems,
+    textMessage,
+    totalCost,
     cart,
     setCart,
     addItem,
     clearCart,
     removeItem,
-    updateItem,
+    updateCart,
+    subTotal,
   };
 };
 
