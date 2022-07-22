@@ -7,13 +7,13 @@ interface prop {
   mp?: boolean;
 }
 
-const Payment = ({ wap = false, mp=true }: prop) => {
+const Payment = ({ wap = true, mp=true }: prop) => {
   return (
     <HStack>
       {wap && <Whatsaap />}
       {mp && <MercadoPago />}
     </HStack>
-  );
+  )
 };
 
 export default Payment;
