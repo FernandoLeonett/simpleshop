@@ -26,8 +26,8 @@ const useCart = () => {
     };
     if (found == -1) {
       setCart((prev) => {
-        prev.push(newItem);
-        const newList = [...prev];
+
+        const newList = [newItem,...prev];
         return newList;
       });
     } else {

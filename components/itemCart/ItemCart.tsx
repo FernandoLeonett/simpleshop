@@ -1,18 +1,25 @@
 import React from "react";
 import {
   HStack,
+  Stack,
+  VStack,
   Image,
   Box,
+  StackDivider,
+  Heading,
   Text,
   Flex,
   Table,
+  Thead,
   Tbody,
   Tfoot,
   Tr,
   Th,
   Td,
+  TableCaption,
   TableContainer,
   Center,
+  Button,
   Divider,
   IconButton,
 } from "@chakra-ui/react";
@@ -28,17 +35,25 @@ interface Prop {
 }
 
 const ItemCart = ({ itemCart }: Prop): JSX.Element => {
-  const [isSmallerThan385] = useMediaQuery("(max-width: 385px)");
+  const [isSmallerThan385] = useMediaQuery("(max-width: 385px)")
   const { updateCart, removeItem } = useCart();
 
   const onMinus = () => {
-    updateCart(itemCart.product, -1);
+    updateCart(itemCart.product, -1)
+    // const updateItem = {...itemCart}
+    // updateItem.quantityUnits= updateItem.quantityUnits-1
 
-  };
+    // setCart((prev => [...prev.filter(c => c.product.id !== itemCart.product.id), updateItem]))
+
+
+  }
 
   const onMore = () => {
-    updateCart(itemCart.product, 1);
-  };
+    updateCart(itemCart.product, 1)
+
+
+  }
+
 
   return (
     <>
@@ -138,4 +153,4 @@ const ItemCart = ({ itemCart }: Prop): JSX.Element => {
   );
 };
 
-export default ItemCart;
+export default ItemCart
